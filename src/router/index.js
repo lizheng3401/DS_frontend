@@ -24,6 +24,10 @@ export default new Router({
       component: Home,
       children: [
         {
+          path: '',
+          redirect: '/table',
+        },
+        {
           path: '/charts',
           component: BaseCharts
         },

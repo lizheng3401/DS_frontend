@@ -1,48 +1,18 @@
 <template>
   <div class="sidebar">
     <el-menu default-active="1" theme="dark" class="el-menu-vertical-demo"  unique-opened router
-      background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航一</span>
-        </template>
-        <el-menu-item-group>
-          <template slot="title">分组1-1</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="2">
-        <template slot="title">
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
-        </template>
-        <el-menu-item-group>
-          <template slot="title">分组2一1</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="3">
-        <template slot="title">
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航三</span>
-        </template>
-        <el-menu-item-group>
-          <template slot="title">分组3-1</template>
-          <el-menu-item index="3-1">选项1</el-menu-item>
-          <el-menu-item index="3-2">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span>导航四</span>
-      </el-menu-item>
-      <el-menu-item index="5">
-        <i class="el-icon-setting"></i>
-        <span>导航五</span>
-      </el-menu-item>
+      background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" @open="handleOpen" @close="handleClose">
+      <template v-for="menuItem in menu">
+        <el-submenu v-if="menuItem.subs" :index="menuItem.index">
+          <span slot="title"><i :class="menuItem.icon"></i>{{menuItem.title}}</span>
+          <el-menu-item v-for="(subsItem, i) in menuItem.subs" :key="i" :index="subsItem.index">
+            {{subsItem.title}}
+          </el-menu-item>
+        </el-submenu>
+        <el-menu-item v-else :index="menuItem.index">
+          <span><i :class="menuItem.icon"></i>{{menuItem.title}}</span>
+        </el-menu-item>
+      </template>
     </el-menu>
   </div>
 </template>
@@ -50,12 +20,71 @@
 <script>
   export default {
     name: "side-bar",
+    data: function () {
+      return {
+        menu: [
+          {
+            icon: 'el-icon-setting',
+            index: 'readme',
+            title: '自述'
+          },
+          {
+            icon: 'el-icon-menu',
+            index: '2',
+            title: '表格',
+            subs: [
+              {
+                index: 'table',
+                title: '基础表格'
+              },
+              {
+                index: 'vuetable',
+                title: 'Vue表格组件'
+              }
+            ]
+          },
+          {
+            icon: 'el-icon-date',
+            index: '3',
+            title: '表单',
+            subs: [
+              {
+                index: 'baseform',
+                title: '基本表单'
+              },
+              {
+                index: 'vueeditor',
+                title: '编辑器'
+              },
+              {
+                index: 'markdown',
+                title: 'markdown'
+              },
+              {
+                index: 'upload',
+                title: '文件上传'
+              }
+            ]
+          },
+          {
+            icon: 'el-icon-star-on',
+            index: 'charts',
+            title: '图表'
+          },
+          {
+            icon: 'el-icon-upload2',
+            index: 'drag',
+            title: '拖拽'
+          }
+        ]
+      }
+    },
     methods: {
       handleOpen(key, keyPath) {
-
+        console.log(key, keyPath)
       },
       handleClose(key, keyPath) {
-
+        console.log(key, keyPath)
       }
     }
   }

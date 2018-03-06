@@ -44,8 +44,19 @@
         const self = this;
         self.$refs[formName].validate((valid) => {
           if (valid) {
-            localStorage.setItem('ms_username', self.ruleForm.username);
-            self.$router.push('/index');
+            this.$http({
+              url: '/login/',
+              method: 'Post',
+              data: {
+                username: this.ruleForm.username,
+                password: this.ruleForm.password
+              }
+            }).then( (response) => {
+              console.log(response.data);
+              self.$router.push({ name: 'table'});
+            }).catch( function (error) {
+              console.log(error)
+            });
           } else {
             console.log('error submit!!');
             return false;

@@ -1,55 +1,73 @@
 <template>
-  <div class="Table">
-    <chart :options="polar"></chart>
+  <div class="basecharts">
+    <chart :options="op"></chart>
   </div>
 </template>
 
 <script>
   export default {
-    name: "table",
+    name: "basecharts",
     data: function () {
-      let data = []
-      for (let i = 0; i <= 360; i++) {
-        let t = i / 180 * Math.PI
-        let r = Math.sin(2 * t) * Math.cos(2 * t)
-        data.push([r, i])
-      }
       return {
-        polar: {
-          title: {
-            text: '极坐标双数值轴'
-          },
-          legend: {
-            data: ['line']
-          },
-          polar: {
-            center: ['50%', '54%']
-          },
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-              type: 'cross'
-            }
-          },
-          angleAxis: {
-            type: 'value',
-            startAngle: 0
-          },
-          radiusAxis: {
-            min: 0
-          },
-          series: [
-            {
-              coordinateSystem: 'polar',
-              name: 'line',
-              type: 'line',
-              showSymbol: false,
-              data: data
-            }
-          ],
-          animationDuration: 2000
-        }
+        data: {},
+        op: {}
       }
+    },
+    methods: {
+      getData: function () {
+        this.$http({
+          url: 'api/sleepData/1',
+          method: 'Get'
+        }).then((response) => {
+          this.op = {
+            title: {
+              text: '2018-3-6'
+            },
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data:['heart','breath']
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            toolbox: {
+              feature: {
+                saveAsImage: {}
+              }
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: response.data.time
+            },
+            yAxis: {
+              type: 'value'
+            },
+            series: [
+              {
+                name:'heart',
+                type:'line',
+                data:response.data.heart
+              },
+              {
+                name:'breath',
+                type:'line',
+                data:response.data.breath
+              }
+            ]
+          }
+        }).catch( function (error) {
+          console.log(error);
+        })
+      },
+    },
+    created: function () {
+      this.getData()
     }
   }
 </script>
