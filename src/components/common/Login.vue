@@ -53,7 +53,7 @@
               }
             }).then( (response) => {
               console.log(response.data);
-              self.$router.push({ name: 'table'});
+              self.$router.push('/table');
             }).catch( function (error) {
               console.log(error)
             });

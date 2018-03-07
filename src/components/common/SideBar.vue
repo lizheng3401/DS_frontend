@@ -73,8 +73,8 @@
           },
           {
             icon: 'el-icon-upload2',
-            index: 'drag',
-            title: '拖拽'
+            index: 'test',
+            title: '测试'
           }
         ]
       }
