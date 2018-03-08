@@ -1,6 +1,6 @@
 <template>
-  <div class="basecharts">
-    <chart :options="op"></chart>
+  <div>
+    <chart :options="op" :theme="theme"></chart>
   </div>
 </template>
 
@@ -10,7 +10,8 @@
     data: function () {
       return {
         data: {},
-        op: {}
+        op: {},
+        theme: "dark"
       }
     },
     methods: {
@@ -36,7 +37,12 @@
               containLabel: true
             },
             toolbox: {
+              left: 'right',
               feature: {
+                dataZoom: {
+                  yAxisIndex: 'none'
+                },
+                restore: {},
                 saveAsImage: {}
               }
             },
@@ -48,17 +54,55 @@
             yAxis: {
               type: 'value'
             },
+            dataZoom: [{
+              startValue: '150'
+            },{
+              type: 'inside'
+            }],
+            visualMap: {
+              top: 10,
+              right: 10,
+              pieces: [{
+                gt: 0,
+                lte: 20,
+                color: '#096'
+              }, {
+                gt: 20,
+                lte: 40,
+                color: '#ffde33'
+              }, {
+                gt: 40,
+                lte: 60,
+                color: '#ff9933'
+              }, {
+                gt: 60,
+                lte: 80,
+                color: '#cc0033'
+              }, {
+                gt: 80,
+                lte: 100,
+                color: '#660099'
+              }, {
+                gt: 100,
+                color: '#7e0023'
+              }],
+              outOfRange: {
+                color: '#999'
+              }
+            },
             series: [
               {
                 name:'heart',
                 type:'line',
+                smooth: true,
                 data:response.data.heart
               },
               {
                 name:'breath',
                 type:'line',
+                smooth: true,
                 data:response.data.breath
-              }
+              },
             ]
           }
         }).catch( function (error) {
@@ -67,7 +111,7 @@
       },
     },
     created: function () {
-      this.getData()
+      this.getData();
     }
   }
 </script>

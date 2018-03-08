@@ -58,4 +58,4 @@ Mock.mock('/news', /post|get/i, produceData);//当post或get请求到/news路由
 
 Mock.mock('/users/', 'get',userData);
 Mock.mock('api/sleepData/1', 'get', sleepData);
-
+Mock.mock('/login/', 'post', "success");
