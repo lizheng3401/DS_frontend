@@ -23,33 +23,13 @@
       }
     },
     methods: {
-      setNewsApi: function() {
-        this.$http.post("/news", "type=top&key=123456").then(res => {
-          console.log(res.data);
-          this.newsListShow = res.data.data;
-        });
-      },
-      getTest: function () {
-        this.$http.get("/users/").then(res => {
-          console.log(res.data);
-          this.people = res.data
-        })
-      }
+
     },
     computed: {
-      changePeople(){
-        return this.$store.getters.changePeople
-      }
+
     },
     created: function () {
-      this.getTest();
-      this.$store.commit('getParam',{
-        keyCode: 213,
-        keyWord: 'key',
-        hunterCode: 2433,
-        sid: 3343214431244,
-      });
-      console.log(this.changePeople())
+
     }
   }
 </script>

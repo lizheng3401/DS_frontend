@@ -45,17 +45,18 @@ const sleepData = function (opt) {
     time: [],
     heart: [],
     breath: []
-  }
+  };
   for(let i = 0; i < 200; i++)
   {
-    sleep.time.push(i)
-    sleep.heart.push(Random.natural(30, 100))
-    sleep.breath.push(Random.natural(8, 40))
+    sleep.time.push(i);
+    sleep.heart.push(Random.natural(30, 100));
+    sleep.breath.push(Random.natural(8, 40));
   }
   return sleep
-}
+};
 Mock.mock('/news', /post|get/i, produceData);//当post或get请求到/news路由时Mock会拦截请求并返回上面的数据
 
 Mock.mock('/users/', 'get',userData);
 Mock.mock('api/sleepData/1', 'get', sleepData);
 Mock.mock('/login/', 'post', "success");
+Mock.mock('/allusers', 'get', sleepData);

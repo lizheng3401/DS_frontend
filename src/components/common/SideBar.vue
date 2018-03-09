@@ -1,7 +1,9 @@
 <template>
   <div class="sidebar">
-    <el-menu default-active="1" theme="dark" class="el-menu-vertical-demo"  unique-opened router
-      background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" @open="handleOpen" @close="handleClose">
+    <el-menu default-active="1" theme="dark" class="el-menu-vertical-demo"
+             unique-opened router
+             background-color="#545c64" text-color="#fff" active-text-color="#ffd04b"
+             @open="handleOpen" @close="handleClose" @select="handleOpen">
       <template v-for="menuItem in menu">
         <el-submenu v-if="menuItem.subs" :index="menuItem.index">
           <span slot="title"><i :class="menuItem.icon"></i>{{menuItem.title}}</span>
@@ -18,6 +20,7 @@
 </template>
 
 <script>
+  import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
   export default {
     name: "side-bar",
     data: function () {
@@ -25,27 +28,27 @@
         menu: [
           {
             icon: 'el-icon-setting',
-            index: 'readme',
-            title: '自述'
+            index: 'overview',
+            title: '概况'
           },
           {
             icon: 'el-icon-menu',
-            index: '2',
-            title: '表格',
+            index: 'table',
+            title: '后台信息一览表',
             subs: [
               {
-                index: 'table',
-                title: '基础表格'
+                index: 'BaseTable',
+                title: '用户信息'
               },
               {
-                index: 'vuetable',
-                title: 'Vue表格组件'
+                index: 'vueTable',
+                title: '设备信息'
               }
             ]
           },
           {
             icon: 'el-icon-date',
-            index: '3',
+            index: 'form',
             title: '表单',
             subs: [
               {
@@ -53,7 +56,7 @@
                 title: '基本表单'
               },
               {
-                index: 'vueeditor',
+                index: 'vueEditor',
                 title: '编辑器'
               },
               {
@@ -68,7 +71,7 @@
           },
           {
             icon: 'el-icon-star-on',
-            index: 'charts',
+            index: 'BaseCharts',
             title: '图表'
           },
           {
@@ -80,11 +83,17 @@
       }
     },
     methods: {
+      ...mapMutations([
+        'addBread',
+        'delBread',
+      ]),
       handleOpen(key, keyPath) {
-
+        this.addBread(key);
+        console.log(key,keyPath)
       },
       handleClose(key, keyPath) {
-
+        this.delBread();
+        console.log(key,keyPath)
       }
     }
   }

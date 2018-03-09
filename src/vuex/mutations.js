@@ -1,5 +1,10 @@
-export default {
-  getParam(state, Object){
-    state.START_PARMA = Object
+ const mutations = {
+  addBread(state, item){
+    state.breads.push(item);
+  },
+  delBread(state){
+    state.breads.pop();
   }
-}
+};
+
+ export default mutations

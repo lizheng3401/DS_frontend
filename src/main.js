@@ -8,11 +8,9 @@ import store from './vuex'
 import axios from 'axios'
 import ECharts from 'vue-echarts/components/ECharts'
 import ElementUI from 'element-ui'
-import './mock/mock'
 import 'element-ui/lib/theme-default/index.css'
-import 'echarts/lib/chart/bar'
-import 'echarts/lib/component/tooltip'
-import '../static/js/dark'
+
+import './mock/mock'
 
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;

@@ -15,12 +15,16 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   export default {
     name: "Header",
     data: function () {
       return {
         username: 'username'
       }
+    },
+    computed: {
+      ...mapState(['breads'])
     },
     methods: {
       handleCommand: function (command){

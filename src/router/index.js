@@ -5,6 +5,7 @@ import Login from '@/components/common/Login'
 import BaseCharts from '@/components/page/BaseCharts'
 import BaseTable from '@/components/page/BaseTable'
 import Test from '@/components/page/Test'
+import OverView from '@/components/page/OverView'
 
 Vue.use(Router)
 
@@ -25,19 +26,23 @@ export default new Router({
       children: [
         {
           path: '',
-          redirect: '/table',
+          redirect: 'overview',
         },
         {
-          path: '/test',
+          path: 'test',
           component: Test
         },
         {
-          path: '/charts',
+          path: 'BaseCharts',
           component: BaseCharts
         },
         {
-          path: '/table',
+          path: 'BaseTable',
           component: BaseTable
+        },
+        {
+          path: 'overview',
+          component: OverView,
         }
       ]
     }

@@ -112,13 +112,20 @@ export default {
         });
     },
     handleSearch: function () {
-      
+
     },
     handleAdd: function () {
       this.dialogFormVisible = true;
     },
     handleExport: function () {
+      this.$http({
+        url: '/allusers/',
+        method: 'get'
+      }).then( (resp) => {
 
+      }).catch( function (error) {
+        console.log(error)
+      })
     },
     handleCurrentChange: function (val) {
       this.listQuery.page = val;
@@ -140,11 +147,12 @@ export default {
 
 <style scoped>
   .filter-container{
-    margin: 20px auto; 
+    margin: 20px auto;
   }
   .filter-item{
     display: inline-block;
     vertical-align: middle;
+    text-align: center;
     margin-left:10px
   }
   .pagination-container{
