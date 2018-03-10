@@ -1,0 +1,178 @@
+
+
+1.注册
+请求接口:http://sleeper.xiaopeng.site/api/Register
+请求头:
+Content-Type:application/json
+请求方式:POST
+数据(json格式):{"Phone":"18780271747","Password":"12345678","Name":"肖鹏","Sex":"男","BirthDate":"1994-03-02"}
+格式化后：
+{
+    "Phone": "18780271747",
+    "Password": "12345678",
+    "Name": "肖鹏",
+    "Sex": "男",
+    "Birthdate": "1994-03-02"
+}
+
+服务器返回数据格式：(flag:0表示失败，1表示成功)
+{
+    "Flag": "0",
+    "Message": "注册失败，您已注册！"
+}
+{
+    "Flag": "1",
+    "Message": "注册成功！"
+}
+
+
+
+2.登录
+请求接口:http://sleeper.xiaopeng.site/api/Login
+请求头:
+Content-Type:application/json
+请求方式:POST
+数据(json格式):{"Phone":"18780271747","Password":"12345678"}
+格式化后：
+{
+    "Phone": "18780271747",
+    "Password": "12345678",
+}
+
+返回数据：(flag:0表示失败，1表示成功)
+{
+    "Flag": "1",
+    "Message": "登录成功!",
+    "Token": "NAOAep5LbmaBtxxRGNqo03A/c7WeqhsteMCHPoKBySQSSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z2pAeKBH69WjH7iZYbCl3cM00o4X0GXTadPbxvGp4FKH"
+}
+
+{
+    "Flag": "0",
+    "Message": "密码不正确!"
+}
+
+
+
+3.上传睡眠数据
+请求接口:http://sleeper.xiaopeng.site/api/DataUpload
+请求头：
+Content-Type:application/json
+Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z/o8V2fv2TiOwLQ33jKcsLhFni9uHgXQX3teepweLPwK
+请求方式:POST
+数据(json格式):{"StartTime": "22:16","EndTime": "7:38","MoveTimes": "7","DangerTimes": "1","HeartRate":"[53,67,88,76,78,75,69,73,71,77]","SleepData": "[5,6,5,6,6,5]","Date":"20180301"}
+格式化后：
+{
+    "StartTime": "22:16",
+    "EndTime": "7:38",
+    "MoveTimes": "7",
+    "DangerTimes": "1",
+    "HeartRate": "[53,67,88,76,78,75,69,73,71,77]",
+    "SleepData": "[5,6,5,6,6,5]",
+    "Date": "20180301"
+}
+返回数据：(flag:0表示失败，1表示成功)
+{
+    "Flag": "0",
+    "Message": "您已上传过20180302数据,无需重复上传!"
+}
+
+{
+    "Flag": "1",
+    "Message": "数据上传成功！"
+}
+
+4.睡眠数据获取
+请求接口:http://sleeper.xiaopeng.site/api/DataDownload?Date=20180307
+	Date参数是指获取哪一天的睡眠数据
+请求头：
+Content-Type:application/json
+Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z/o8V2fv2TiOwLQ33jKcsLhFni9uHgXQX3teepweLPwK
+请求方式:GET
+
+{
+    "StartTime": "22:16",
+    "EndTime": "7:38",
+    "MoveTimes": "7",
+    "DangerTimes": "1",
+    "HeartRate": "[53,67,88,76,78,75,69,73,71,77]",
+    "SleepData": "[5,6,5,6,6,5]",
+    "Date": "20180302"
+}
+
+5.获取指定日期睡眠健康人数占比
+请求接口:http://sleeper.xiaopeng.site/api/SleepPercent?Date=20180301
+请求方式：GET
+请求头:
+Content-Type:application/json
+Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z/o8V2fv2TiOwLQ33jKcsLhFni9uHgXQX3teepweLPwK
+返回结果：
+{
+    "Flag": "1",
+    "Message": "睡眠健康人数百分比获取成功!",
+    "Percent": "67"
+}
+
+
+6.获取指定日期失眠人数占比
+请求接口:http://sleeper.xiaopeng.site/api/SleepBadPercent?Date=20180301
+请求方式：GET
+请求头:
+Content-Type:application/json
+Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z/o8V2fv2TiOwLQ33jKcsLhFni9uHgXQX3teepweLPwK
+返回结果：
+{
+    "Flag": "1",
+    "Message": "失眠人数百分比获取成功!",
+    "Percent": "33"
+}
+
+
+7.获取指定日期睡眠健康人数占比
+请求接口:http://sleeper.xiaopeng.site/api/BreathPercent?Date=20180301
+请求方式：GET
+请求头:
+Content-Type:application/json
+Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z/o8V2fv2TiOwLQ33jKcsLhFni9uHgXQX3teepweLPwK
+返回结果：
+{
+    "Flag": "1",
+    "Message": "呼吸正常人数百分比获取成功!",
+    "Percent": "94"
+}
+
+
+
+8.获取指定日期睡眠健康人数占比
+请求接口:http://sleeper.xiaopeng.site/api/BreathBadPercent?Date=20180301
+请求方式：GET
+请求头:
+Content-Type:application/json
+Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z/o8V2fv2TiOwLQ33jKcsLhFni9uHgXQX3teepweLPwK
+返回结果：
+{
+    "Flag": "1",
+    "Message": "呼吸异常人数百分比获取成功!",
+    "Percent": "6"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,12 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/common/Home'
 import Login from '@/components/common/Login'
-import BaseCharts from '@/components/page/BaseCharts'
 import BaseTable from '@/components/page/BaseTable'
 import Test from '@/components/page/Test'
 import OverView from '@/components/page/OverView'
+import Info from '@/components/page/Info'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -29,12 +29,8 @@ export default new Router({
           redirect: 'overview',
         },
         {
-          path: 'test',
-          component: Test
-        },
-        {
-          path: 'BaseCharts',
-          component: BaseCharts
+          path: 'info/:item',
+          component: Info,
         },
         {
           path: 'BaseTable',
@@ -43,7 +39,15 @@ export default new Router({
         {
           path: 'overview',
           component: OverView,
-        }
+        },
+        {
+          path: 'deviceTable',
+          component: null,
+        },
+        {
+          path: 'test',
+          component: Test
+        },
       ]
     }
   ]

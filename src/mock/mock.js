@@ -5,9 +5,7 @@ const data = Mock.mock({
     'id|+1': 1
   }]
 });
-// 获取 mock.Random 对象
 const Random = Mock.Random;
-// mock一组数据
 const produceData = function (opt) {
   let articles = [];
   for (let i = 0; i < 10; i++) {
@@ -23,7 +21,6 @@ const produceData = function (opt) {
     data: articles
   }
 };
-
 const userData = function (opt) {
   let users = [];
   for(let i = 0; i < 10; i++)
@@ -58,8 +55,60 @@ const sleepData = function (opt) {
   }
   return sleep
 };
+const sleepusers = function (opt) {
+  let result = {
+    cate: '睡眠',
+    expectedData: [],
+    actualData:[],
+  };
+  for (let i = 0; i < 31; i++)
+  {
+    result.expectedData.push(Random.natural(10, 1000));
+    result.actualData.push(Random.natural(500, 10000))
+  }
+  return result
+};
+const breathusers = function (opt) {
+  let result = {
+    cate: '呼吸率',
+    expectedData: [],
+    actualData:[],
+  };
+  for (let i = 0; i < 31; i++)
+  {
+    result.expectedData.push(Random.natural(0, 10));
+    result.actualData.push(Random.natural(10, 30))
+  }
+  return result
+};
+const heartusers = function (opt) {
+  let result = {
+    cate: '心率',
+    expectedData: [],
+    actualData:[],
+  };
+  for (let i = 0; i < 31; i++)
+  {
+    result.expectedData.push(Random.natural(0, 30));
+    result.actualData.push(Random.natural(30, 80))
+  }
+  return result
+}
+const moveusers = function (opt) {
+  let result = {
+    cate: '体动',
+    expectedData: [],
+    actualData:[],
+  };
+  for (let i = 0; i < 31; i++)
+  {
+    result.expectedData.push(Random.natural(0, 10));
+    result.actualData.push(Random.natural(10, 100))
+  }
+  return result
+}
 
-Mock.mock('/news', /post|get/i, produceData);//当post或get请求到/news路由时Mock会拦截请求并返回上面的数据
+Mock.mock('/news', /post|get/i, produceData);
 Mock.mock('/users/', 'get',userData);
 Mock.mock('api/sleepData/1', 'get', sleepData);
 Mock.mock('/login/', 'post', "success");
@@ -75,6 +124,15 @@ Mock.mock('/allusers', 'get', Mock.mock({
       {'type': 'warning', 'content': '异常'},
       {'type': 'dangering', 'content': '危险'},
     ]
-    // ['success', 'warning', 'dangering'],
   }]
 }));
+
+Mock.mock(RegExp('api/sleep/users*'), 'get', sleepusers);
+Mock.mock(RegExp('api/heart/users*'), 'get', heartusers);
+Mock.mock(RegExp('api/breath/users*'), 'get', breathusers);
+Mock.mock(RegExp('api/move/users*'), 'get', moveusers);
+
+Mock.mock(RegExp('sleepPercent/*'),'get',{'Percent': Random.natural(0, 100)} );
+Mock.mock(RegExp('breathPercent/*'),'get', {'Percent': Random.natural(0, 100)});
+Mock.mock(RegExp('breathBadPercent/*'),'get', {'Percent': Random.natural(0, 100)});
+Mock.mock(RegExp('sleepBadPercent/*'),'get', {'Percent': Random.natural(0, 100)});

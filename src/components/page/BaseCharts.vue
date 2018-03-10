@@ -1,123 +1,163 @@
 <template>
-  <div>
-    <chart :options="op" :theme="theme" :auto-resize="true"></chart>
-  </div>
+  <div :class="className" :style="{height:height,width:width}"></div>
 </template>
 
 <script>
+  import echarts from 'echarts'
+  require('echarts/theme/dark')
+  import {debounce} from '../../utils'
+
   export default {
-    name: "basecharts",
+    name: "base-charts",
+    props: {
+      className: {
+        type: String,
+        default: 'chart'
+      },
+      width: {
+        type: String,
+        default: '100%'
+      },
+      height: {
+        type: String,
+        default: '400px'
+      },
+      autoResize: {
+        type: Boolean,
+        default: true
+      },
+      chartData: {
+        type: Object
+      }
+    },
     data: function () {
       return {
-        op: {},
-        theme: "macarons"
+        chart: null
+      }
+    },
+    mounted: function () {
+      this.initChart();
+      if(this.autoResize){
+        this.__resizeHanlder = debounce( () => {
+          if (this.chart){
+            this.chart.resize();
+          }
+        }, 100);
+        window.addEventListener('resize', this.__resizeHanlder)
+      }
+    },
+    beforeDestroy: function () {
+      if(!this.chart){
+        return
+      }
+      if(this.autoResize){
+        window.removeEventListener('resize', this.__resizeHanlder)
+      }
+
+      this.chart.dispose();
+      this.chart = null
+    },
+    watch: {
+      chartData: {
+        deep: true,
+        handler: function (val) {
+          console.log(val)
+          this.setOptions(val);
+        }
       }
     },
     methods: {
-      getData: function () {
-        this.$http({
-          url: 'api/sleepData/1',
-          method: 'Get'
-        }).then((response) => {
-          this.op = {
-            title: {
-              text: '2018-3-6'
-            },
-            tooltip: {
-              trigger: 'axis'
-            },
-            legend: {
-              data:['heart','breath']
-            },
-            grid: {
-              left: '3%',
-              right: '4%',
-              bottom: '3%',
-              containLabel: true
-            },
-            toolbox: {
-              left: 'right',
-              feature: {
-                dataZoom: {
-                  yAxisIndex: 'none'
-                },
-                restore: {},
-                saveAsImage: {}
+      setOptions: function ({ cate, expectedData, actualData } = {}) {
+        if (!cate){
+          cate = ''
+        }
+        this.chart.setOption({
+          title: {
+            text: '最近30天'+ cate +'折线图'
+          },
+          xAxis: {
+            data: ['1', '2', '3', '4', '5', '6', '7', '8', '9','10', '11', '12', '13', '14', '15', '16',
+            '17', '18', '19', '20', '21', '22', '23', '24', '25', '27', '28', '29', '30', '31'],
+            boundaryGap: false,
+            axisTick: {
+              show: false
+            }
+          },
+          grid: {
+            left: 10,
+            right: 10,
+            bottom: 20,
+            containLabel: true
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross',
+              label: {
+                backgroundColor: '#000000',
+                // formatter: '{value}'
               }
             },
-            xAxis: {
-              type: 'category',
-              boundaryGap: false,
-              data: response.data.time
-            },
-            yAxis: {
-              type: 'value'
-            },
-            dataZoom: [{
-              startValue: '150'
-            },{
-              type: 'inside'
-            }],
-            visualMap: {
-              top: 10,
-              right: 10,
-              pieces: [{
-                gt: 0,
-                lte: 20,
-                color: '#096'
-              }, {
-                gt: 20,
-                lte: 40,
-                color: '#ffde33'
-              }, {
-                gt: 40,
-                lte: 60,
-                color: '#ff9933'
-              }, {
-                gt: 60,
-                lte: 80,
-                color: '#cc0033'
-              }, {
-                gt: 80,
-                lte: 100,
-                color: '#660099'
-              }, {
-                gt: 100,
-                color: '#7e0023'
-              }],
-              outOfRange: {
-                color: '#999'
-              }
-            },
-            series: [
-              {
-                name:'heart',
-                type:'line',
-                smooth: true,
-                data:response.data.heart
+            padding: [5, 10]
+          },
+          yAxis: {
+            name: '人数',
+            axisTick: {
+              show: false
+            }
+          },
+          legend: {
+            data: [ '正常', '异常']
+          },
+          toolbox: {
+            feature: {
+              restore: {},
+              saveAsImage: {},
+            }
+          },
+          series: [
+            {
+              name: '正常',
+              smooth: true,
+              type: 'line',
+              itemStyle: {
+                normal: {
+                  color: '#4bfa3f',
+                  lineStyle: {
+                    color: '#4bfa3f',
+                    width: 2
+                  }
+                }
               },
-              {
-                name:'breath',
-                type:'line',
-                smooth: true,
-                data:response.data.breath
+              data: actualData,
+              animationDuration: 2500,
+              animationEasing: 'quadraticOut'
+            },
+            {
+              name: '异常',
+              itemStyle: {
+                normal: {
+                  color: '#FF005A',
+                  lineStyle: {
+                    color: '#FF005A',
+                    width: 2
+                  }
+                }
               },
-            ]
-          }
-        }).catch( function (error) {
-          console.log(error);
-        })
+              smooth: true,
+              type: 'line',
+              data: expectedData,
+              animationDuration: 2500,
+              animationEasing: 'cubicInOut'
+            }
+          ]
+        });
       },
-      setOp: function (op) {
-        this.op = op
-      },
-      setTheme: function (theme) {
-        this.theme = theme
+      initChart: function () {
+        this.chart = echarts.init(this.$el, 'dark');
+        this.setOptions(this.chartData)
       }
     },
-    created: function () {
-      this.getData();
-    }
   }
 </script>
 

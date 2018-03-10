@@ -1,156 +1,111 @@
 <template>
   <div class="over-view">
-    <div style="text-align:center;"><span style="font-size: 20px">2018年3月9日</span></div>
-    <el-row>
-      <el-col :span="4" v-for="(item, index) in percentage" :key="index" :offset="index > 0 ? 2 : 0" @click="handleCard(index)">
-          <h3>{{item.title}}</h3>
-          <el-progress type="circle" :percentage="item.percent" :stroke-width="20" :status="item.st"></el-progress>
-      </el-col>
-    </el-row>
+    <el-card>
+      <div slot="header" style="text-align: center">
+        <span><strong>{{title}}</strong></span>
+      </div>
+      <el-row style="padding-left: 100px">
+        <el-col :span="4" v-for="(item, index) in percentage" :key="index" :offset="index > 0 ? 2 : 0" >
+          <div @click="handleCard(index)">
+            <h3>{{item.title}}</h3>
+            <el-progress type="circle" :percentage="item.percent" :stroke-width="20"></el-progress>
+          </div>
+        </el-col>
+      </el-row>
+    </el-card>
     <div style="margin-top: 10px">
-      <chart :options="op" :theme="theme"></chart>
+      <base-chart :chartData="topChartData"></base-chart>
     </div>
-    <line-chart height="600px" width=""></line-chart>
   </div>
 </template>
 
 <script>
-  import LineChart from './LineChart'
+  import BaseChart from '@/components/page/BaseCharts'
+
   export default {
     name: "over-view",
+    components: {
+      BaseChart,
+    },
     data: function () {
+      let time = new Date()
       return {
-        url: [
-          'sleepPercent/',
-          'sleepBadPercent/',
-          'breathPercent/',
-          'breathBadPercent/'
-        ],
+        title: time.getFullYear()+"年"+ (time.getMonth() + 1) + "月" + time.getDate() + "日睡眠监测概况",
+        URL: {
+          title: [
+            '睡眠正常人数',
+            '失眠人数',
+            '呼吸正常人数',
+            '呼吸异常人数',
+          ],
+          chartUrl: [
+            'api/sleep/users',
+            'api/heart/users',
+            'api/breath/users',
+            'api/move/users'
+          ],
+          percentUrl: [
+            'sleepPercent/',
+            'sleepBadPercent/',
+            'breathPercent/',
+            'breathBadPercent/',
+          ]
+        },
         percentage: [
           {
             title: "睡眠正常占比",
-            percent: 90,
-            status: "success"
+            percent: 0,
           },
           {
-            title: "失眠人数占比",
-            percent: 15,
-            st: "exception"
+            title: "心率正常占比",
+            percent: 0,
           },
           {
             title: "呼吸正常占比",
-            percent: 80,
-            st: "success"
+            percent: 0,
           },
           {
-            title: "呼吸异常占比",
-            percent: 3,
-            st: "exception"
+            title: "体动异常占比",
+            percent: 0,
           }
         ],
-        theme: 'dark',
-        op: {}
+        topChartData: {},
+        mediumChartData: {}
       }
     },
-    components:{
-      LineChart,
-    },
     methods: {
-      getData: function () {
+      getPercent: function () {
+        for(let i = 0; i < 4; i++){
+          this.$http({
+            url:this.URL.percentUrl[i]
+          }).then( (resp) => {
+            this.percentage[i].percent = resp.data.Percent;
+          }).catch(function (error) {
+            console.log(error);
+          });
+        }
+      },
+      getData: function (url) {
         this.$http({
-          url: 'api/sleepData/1',
+          url: url,
           method: 'Get'
         }).then((response) => {
-          this.op = {
-            title: {
-              text: '2018-3-6'
-            },
-            tooltip: {
-              trigger: 'axis'
-            },
-            legend: {
-              data:['heart','breath']
-            },
-            grid: {
-              left: '3%',
-              right: '4%',
-              bottom: '3%',
-              containLabel: true
-            },
-            toolbox: {
-              left: 'right',
-              feature: {
-                saveAsImage: {}
-              }
-            },
-            xAxis: {
-              type: 'category',
-              boundaryGap: false,
-              data: response.data.time
-            },
-            yAxis: {
-              type: 'value'
-            },
-            series: [
-              {
-                name:'heart',
-                type:'line',
-                smooth: true,
-                data:response.data.heart
-              },
-              {
-                name:'breath',
-                type:'line',
-                smooth: true,
-                data:response.data.breath
-              },
-            ]
-          }
+          console.log(JSON.stringify(response.data.cate, null, 2));
+          this.topChartData = response.data
         }).catch( function (error) {
           console.log(error);
         })
       },
       handleCard: function (index) {
-        url = this.url(index);
         var time = new Date();
-        params = time.getFullYear() +""+ time.getMonth() +""+ time.getDate()
-        this.$http({
-          url: url+"?date="+params,
-          method: 'get'
-        }).then( (resp) => {
-          this.op = {
-            title: {
-              text: null
-            },
-            tooltip: {
-              trigger: 'axis'
-            },
-            xAxis: {
-              data: null
-            },
-            yAxis: {
-              splitLine: {
-                show: false
-              }
-            },
-            toolbox: {
-              left: 'right',
-              feature: {
-                saveAsImage: {}
-              }
-            },
-            series: {
-              name: 'Beijing AQI',
-              type: 'line',
-              data: null
-            }
-          }
-        })
+        var url = this.URL.chartUrl[index] +"?date="+ time.getFullYear() +""+ (time.getMonth()+1) +""+ time.getDate();
+        this.getData(url);
       }
     },
     created: function () {
-      this.getData()
-    }
+      this.getPercent()
+      this.getData("api/sleep/users")
+    },
   }
 </script>
 

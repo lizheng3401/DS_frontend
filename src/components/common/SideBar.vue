@@ -33,15 +33,15 @@
           },
           {
             icon: 'el-icon-menu',
-            index: 'table',
+            index: 'info',
             title: '后台信息一览表',
             subs: [
               {
-                index: 'BaseTable',
+                index: 'users',
                 title: '用户信息'
               },
               {
-                index: 'vueTable',
+                index: 'devices',
                 title: '设备信息'
               }
             ]
