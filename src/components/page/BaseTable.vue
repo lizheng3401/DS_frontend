@@ -23,19 +23,24 @@
             <span>{{scope.row.username}}</span>
           </template>
         </el-table-column>
-        <el-table-column width="200" align="center" label="email">
+        <el-table-column width="180" align="center" label="email">
           <template slot-scope="scope">
             <span>{{scope.row.email}}</span>
           </template>
         </el-table-column>
-        <el-table-column width="200" align="center" label="device">
+        <el-table-column width="180" align="center" label="device">
           <template slot-scope="scope">
             <span>{{scope.row.device}}</span>
           </template>
         </el-table-column>
-        <el-table-column width="200" align="center" label="sleep">
+        <el-table-column width="180" align="center" label="sleep">
           <template slot-scope="scope">
             <span>{{scope.row.sleep}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column width="100" align="center" label="status">
+          <template slot-scope="scope">
+            <el-tag :type="scope.row.status" size="small">{{scope.row.status | statusFilter}}</el-tag>
           </template>
         </el-table-column>
         <el-table-column align="center" label="options">
@@ -97,6 +102,19 @@ export default {
       showReviewer: {}
     };
   },
+  filters: {
+    statusFilter(status) {
+      const statusMap = {
+        // Good: 'success',
+        // NotGood: 'info',
+        // Bad: 'danger'
+        success: '健康',
+        warning: '异常',
+        danger: '危险',
+      };
+      return statusMap[status]
+    },
+  },
   methods: {
     getData: function() {
       this.$http({
@@ -105,7 +123,7 @@ export default {
       })
         .then(response => {
           this.Data = response.data.results;
-          console.log(this.Data)
+          console.log(JSON.stringify(this.Data, null, 2))
         })
         .catch(function(error) {
           console.log(error);
@@ -122,7 +140,7 @@ export default {
         url: '/allusers/',
         method: 'get'
       }).then( (resp) => {
-
+        this.Data = response.data.results;
       }).catch( function (error) {
         console.log(error)
       })

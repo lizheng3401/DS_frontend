@@ -49,7 +49,7 @@
           {
             icon: 'el-icon-date',
             index: 'form',
-            title: '表单',
+            title: '异常信息',
             subs: [
               {
                 index: 'baseform',
@@ -72,12 +72,12 @@
           {
             icon: 'el-icon-star-on',
             index: 'BaseCharts',
-            title: '图表'
+            title: '历史数据'
           },
           {
             icon: 'el-icon-upload2',
             index: 'test',
-            title: '测试'
+            title: '昨晚睡眠情况'
           }
         ]
       }

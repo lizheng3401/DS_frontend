@@ -1,9 +1,10 @@
-const Mock = require('mockjs')
+const Mock = require('mockjs');
+
 const data = Mock.mock({
   'list|1-10': [{
     'id|+1': 1
   }]
-})
+});
 // 获取 mock.Random 对象
 const Random = Mock.Random;
 // mock一组数据
@@ -32,7 +33,10 @@ const userData = function (opt) {
       'username': Random.cname(),
       'email': Random.email(),
       'device': Random.id(),
-      'sleep': Random.id()
+      'sleep': Random.id(),
+      // 'status': { 'type': 'success', 'content': '健康'}
+      //['success', 'warning', 'danger'],
+      'status':  ['success', 'warning', 'danger'][Random.natural(0, 2)]
     };
     users.push(newObject);
   }
@@ -54,9 +58,23 @@ const sleepData = function (opt) {
   }
   return sleep
 };
-Mock.mock('/news', /post|get/i, produceData);//当post或get请求到/news路由时Mock会拦截请求并返回上面的数据
 
+Mock.mock('/news', /post|get/i, produceData);//当post或get请求到/news路由时Mock会拦截请求并返回上面的数据
 Mock.mock('/users/', 'get',userData);
 Mock.mock('api/sleepData/1', 'get', sleepData);
 Mock.mock('/login/', 'post', "success");
-Mock.mock('/allusers', 'get', sleepData);
+Mock.mock('/allusers', 'get', Mock.mock({
+  "results|10" :[{
+    'id|+1': 1,
+    'username': Random.cname(),
+    'email': Random.email(),
+    'device': Random.id(),
+    'sleep': Random.id(),
+    'status|1':  [
+      {'type': 'success', 'content': '健康'},
+      {'type': 'warning', 'content': '异常'},
+      {'type': 'dangering', 'content': '危险'},
+    ]
+    // ['success', 'warning', 'dangering'],
+  }]
+}));
