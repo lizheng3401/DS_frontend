@@ -2,16 +2,14 @@
   <div class="over-view">
     <div style="text-align:center;"><span style="font-size: 20px">2018年3月9日</span></div>
     <el-row>
-      <el-col :span="4" v-for="(item, index) in percentage" :key="index" :offset="index > 0 ? 2 : 0">
-        <el-card :body-style="{ padding: '0px' }" >
-          <div style="padding: 10px">
-            <h3>{{item.title}}</h3>
-            <el-progress type="circle" :percentage="item.percent" :stroke-width="20" :status="item.status"></el-progress>
-          </div>
-        </el-card>
+      <el-col :span="4" v-for="(item, index) in percentage" :key="index" :offset="index > 0 ? 2 : 0" @click="handleCard(index)">
+          <h3>{{item.title}}</h3>
+          <el-progress type="circle" :percentage="item.percent" :stroke-width="20" :status="item.st"></el-progress>
       </el-col>
     </el-row>
-    <chart :options="op" :theme="theme"></chart>
+    <div style="margin-top: 10px">
+      <chart :options="op" :theme="theme"></chart>
+    </div>
     <line-chart height="600px" width=""></line-chart>
   </div>
 </template>
@@ -22,6 +20,12 @@
     name: "over-view",
     data: function () {
       return {
+        url: [
+          'sleepPercent/',
+          'sleepBadPercent/',
+          'breathPercent/',
+          'breathBadPercent/'
+        ],
         percentage: [
           {
             title: "睡眠正常占比",
@@ -31,21 +35,21 @@
           {
             title: "失眠人数占比",
             percent: 15,
-            status: "exception"
+            st: "exception"
           },
           {
             title: "呼吸正常占比",
             percent: 80,
-            status: "success"
+            st: "success"
           },
           {
             title: "呼吸异常占比",
             percent: 3,
-            status: "exception"
+            st: "exception"
           }
         ],
-        op: {},
-        theme: 'macarons',
+        theme: 'dark',
+        op: {}
       }
     },
     components:{
@@ -76,10 +80,6 @@
             toolbox: {
               left: 'right',
               feature: {
-                dataZoom: {
-                  yAxisIndex: 'none'
-                },
-                restore: {},
                 saveAsImage: {}
               }
             },
@@ -90,42 +90,6 @@
             },
             yAxis: {
               type: 'value'
-            },
-            dataZoom: [{
-              startValue: '150'
-            },{
-              type: 'inside'
-            }],
-            visualMap: {
-              top: 10,
-              right: 10,
-              pieces: [{
-                gt: 0,
-                lte: 20,
-                color: '#096'
-              }, {
-                gt: 20,
-                lte: 40,
-                color: '#ffde33'
-              }, {
-                gt: 40,
-                lte: 60,
-                color: '#ff9933'
-              }, {
-                gt: 60,
-                lte: 80,
-                color: '#cc0033'
-              }, {
-                gt: 80,
-                lte: 100,
-                color: '#660099'
-              }, {
-                gt: 100,
-                color: '#7e0023'
-              }],
-              outOfRange: {
-                color: '#999'
-              }
             },
             series: [
               {
@@ -146,6 +110,43 @@
           console.log(error);
         })
       },
+      handleCard: function (index) {
+        url = this.url(index);
+        var time = new Date();
+        params = time.getFullYear() +""+ time.getMonth() +""+ time.getDate()
+        this.$http({
+          url: url+"?date="+params,
+          method: 'get'
+        }).then( (resp) => {
+          this.op = {
+            title: {
+              text: null
+            },
+            tooltip: {
+              trigger: 'axis'
+            },
+            xAxis: {
+              data: null
+            },
+            yAxis: {
+              splitLine: {
+                show: false
+              }
+            },
+            toolbox: {
+              left: 'right',
+              feature: {
+                saveAsImage: {}
+              }
+            },
+            series: {
+              name: 'Beijing AQI',
+              type: 'line',
+              data: null
+            }
+          }
+        })
+      }
     },
     created: function () {
       this.getData()

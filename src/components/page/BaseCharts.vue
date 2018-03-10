@@ -1,6 +1,6 @@
 <template>
   <div>
-    <chart :options="op" :theme="theme"></chart>
+    <chart :options="op" :theme="theme" :auto-resize="true"></chart>
   </div>
 </template>
 
@@ -9,9 +9,8 @@
     name: "basecharts",
     data: function () {
       return {
-        data: {},
         op: {},
-        theme: "dark"
+        theme: "macarons"
       }
     },
     methods: {
@@ -109,6 +108,12 @@
           console.log(error);
         })
       },
+      setOp: function (op) {
+        this.op = op
+      },
+      setTheme: function (theme) {
+        this.theme = theme
+      }
     },
     created: function () {
       this.getData();
