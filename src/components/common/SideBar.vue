@@ -28,7 +28,7 @@
         menu: [
           {
             icon: 'el-icon-setting',
-            index: 'overview',
+            index: '/index/overview',
             title: '概况'
           },
           {
@@ -37,46 +37,46 @@
             title: '后台信息一览表',
             subs: [
               {
-                index: 'users',
+                index: '/index/info/users',
                 title: '用户信息'
               },
               {
-                index: 'devices',
+                index: '/index/info/devices',
                 title: '设备信息'
               }
             ]
           },
           {
             icon: 'el-icon-date',
-            index: 'form',
+            index: '/index/form',
             title: '异常信息',
             subs: [
               {
-                index: 'baseform',
+                index: '/index/form/baseform',
                 title: '基本表单'
               },
               {
-                index: 'vueEditor',
+                index: '/index/form/vueEditor',
                 title: '编辑器'
               },
               {
-                index: 'markdown',
+                index: '/index/form/markdown',
                 title: 'markdown'
               },
               {
-                index: 'upload',
+                index: '/index/form/upload',
                 title: '文件上传'
               }
             ]
           },
           {
             icon: 'el-icon-star-on',
-            index: 'BaseCharts',
+            index: '/index/BaseCharts',
             title: '历史数据'
           },
           {
             icon: 'el-icon-upload2',
-            index: 'test',
+            index: '/index/test',
             title: '昨晚睡眠情况'
           }
         ]

@@ -5,7 +5,8 @@ import Login from '@/components/common/Login'
 import BaseTable from '@/components/page/BaseTable'
 import Test from '@/components/page/Test'
 import OverView from '@/components/page/OverView'
-import Info from '@/components/page/Info'
+import UserInfo from '@/components/page/UserInfo'
+import DeviceInfo from '@/components/page/DeviceInfo'
 
 Vue.use(Router);
 
@@ -29,8 +30,12 @@ export default new Router({
           redirect: 'overview',
         },
         {
-          path: 'info/:item',
-          component: Info,
+          path: 'info/users',
+          component: UserInfo,
+        },
+        {
+          path: 'info/devices',
+          component: DeviceInfo
         },
         {
           path: 'BaseTable',
@@ -45,7 +50,7 @@ export default new Router({
           component: null,
         },
         {
-          path: 'test',
+          path: 'test/:id',
           component: Test
         },
       ]

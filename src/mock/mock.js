@@ -1,10 +1,9 @@
-const Mock = require('mockjs');
-
+const Mock = require('mockjs')
 const data = Mock.mock({
   'list|1-10': [{
     'id|+1': 1
   }]
-});
+})
 const Random = Mock.Random;
 const produceData = function (opt) {
   let articles = [];
@@ -22,8 +21,41 @@ const produceData = function (opt) {
   }
 };
 const userData = function (opt) {
+  key = opt.url.split('=')[1].split('&')[0]
+  query = opt.url.split('=')[2]
+  page = parseInt(opt.url.split('=')[1])
+  let j = page*10 - 9
   let users = [];
+  let total = 100
   for(let i = 0; i < 10; i++)
+  {
+    let newObject = {
+      'id': j,
+      'username': Random.cname(),
+      'email': Random.email(),
+      'device': Random.id(),
+      'sleep': Random.id(),
+      'status':  ['success', 'warning', 'danger'][Random.natural(0, 2)]
+    };
+    j += 1
+    if(key === "status")
+    {
+      if(!(newObject.status === query))
+      {
+        continue
+      }
+    }
+    users.push(newObject);
+  }
+  return {
+    results: users,
+    total: total
+  }
+};
+const totalUsers = function (opt) {
+  let users = [];
+  let total = 100
+  for(let i = 0; i < 100; i++)
   {
     let newObject = {
       'id': i+1,
@@ -31,16 +63,15 @@ const userData = function (opt) {
       'email': Random.email(),
       'device': Random.id(),
       'sleep': Random.id(),
-      // 'status': { 'type': 'success', 'content': '健康'}
-      //['success', 'warning', 'danger'],
       'status':  ['success', 'warning', 'danger'][Random.natural(0, 2)]
     };
     users.push(newObject);
   }
   return {
-    results: users
+    results: users,
+    total: total
   }
-};
+}
 const sleepData = function (opt) {
   let sleep = {
     time: [],
@@ -136,3 +167,11 @@ Mock.mock(RegExp('sleepPercent/*'),'get',{'Percent': Random.natural(0, 100)} );
 Mock.mock(RegExp('breathPercent/*'),'get', {'Percent': Random.natural(0, 100)});
 Mock.mock(RegExp('breathBadPercent/*'),'get', {'Percent': Random.natural(0, 100)});
 Mock.mock(RegExp('sleepBadPercent/*'),'get', {'Percent': Random.natural(0, 100)});
+
+
+Mock.mock('api/users/lists/', 'get', totalUsers)
+Mock.mock(RegExp('api/users/list/*'), 'get', userData)
+Mock.mock(RegExp('api/users/create/*'), 'post', 'success')
+Mock.mock(RegExp('api/users/update/*'), 'post', 'success')
+Mock.mock(RegExp('api/users/delete/*'), 'get', 'success')
+
