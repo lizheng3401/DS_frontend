@@ -106,7 +106,6 @@
         listQuery: {
           username: undefined,
           page: 1,
-          type: undefined,
           status: undefined,
         },
         total: 100,
@@ -124,9 +123,6 @@
             content: '危险'
           }
         ],
-        calendarTypeOptions: [],
-        sortOptions: [],
-        showReviewer: {}
       };
     },
     filters: {
@@ -149,7 +145,6 @@
           .then(response => {
             this.Data = response.data.results
             this.total = response.data.total
-            console.log(this.total)
           })
           .catch(function(error) {
             console.log(error);
@@ -157,25 +152,25 @@
       },
       handleSearch: function () {
         this.listQuery.page = 1
+        this.getData()
         this.listQuery.username = ''
         this.listQuery.status = ''
-        this.getData()
       },
       handleAdd: function () {
         this.dialogFormVisible = true;
       },
       handleExport: function () {
-        var self = this
         import('../../utils/export2excel').then( excel => {
           const tHeader = ['ID', '用户名', '电子邮件', '设备ID', '昨晚睡眠状态', '健康状态']
-          const data = self.getTotalUsers()
-          // excel.export_json_to_excel(tHeader, data, 'table-list')
+          const data = this.getTotalUsers()
+          console.log(data)
+          excel.export_json_to_excel(tHeader, data, 'table-list')
         }).catch(function (error) {
           console.log(error);
-          // self.$message({
-          //   type: 'warning',
-          //   message: '导出失败'
-          // })
+          this.$message({
+            type: 'warning',
+            message: '导出失败'
+          })
         })
       },
       handleCurrentChange: function (val) {
@@ -292,14 +287,12 @@
           const filterVal = ['id', 'username', 'email', 'device','sleep','status']
           var data = []
           for(let i = 0; i < resp.data.results.length; i++){
-            var temp = []
-            console.log(resp.results.data[i])
+            let temp = []
             for(var j in filterVal){
-              temp.push(resp.results.data[i][j]+"")
+              temp.push(resp.data.results[i][filterVal[j]]+"")
             }
             data.push(temp)
           }
-          console.log(data)
           return data
         }).catch( function (error) {
           console.log(error);

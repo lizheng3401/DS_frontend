@@ -54,7 +54,6 @@ const userData = function (opt) {
 };
 const totalUsers = function (opt) {
   let users = [];
-  let total = 100
   for(let i = 0; i < 100; i++)
   {
     let newObject = {
@@ -69,7 +68,7 @@ const totalUsers = function (opt) {
   }
   return {
     results: users,
-    total: total
+    total: 100
   }
 }
 const sleepData = function (opt) {
@@ -138,6 +137,38 @@ const moveusers = function (opt) {
   }
   return result
 }
+const deviceData = function (opt) {
+  let devices = []
+  for(let i = 0; i < 10; i++){
+    let newObject = {
+      "id": Random.id(),
+      "createdTime": Random.datetime(),
+      "username":Random.cname(),
+      'status':  ['success', 'warning', 'danger'][Random.natural(0, 2)]
+    }
+    devices.push(newObject)
+  }
+  return {
+    results: devices,
+    total: 100
+  }
+}
+const totalDevices = function (opt) {
+  let devices = []
+  for(let i = 0; i < 100; i++){
+    let newObject = {
+      "id": Random.id(),
+      "createdTime": Random.datetime(),
+      "username":Random.cname(),
+      'status':  ['success', 'warning', 'danger'][Random.natural(0, 2)]
+    }
+    devices.push(newObject)
+  }
+  return {
+    results: devices,
+    total: 100
+  }
+}
 
 Mock.mock('/news', /post|get/i, produceData);
 Mock.mock('/users/', 'get',userData);
@@ -174,4 +205,10 @@ Mock.mock(RegExp('api/users/list/*'), 'get', userData)
 Mock.mock(RegExp('api/users/create/*'), 'post', 'success')
 Mock.mock(RegExp('api/users/update/*'), 'post', 'success')
 Mock.mock(RegExp('api/users/delete/*'), 'get', 'success')
+
+Mock.mock('api/users/lists/', 'get', totalDevices)
+Mock.mock(RegExp('api/devices/list/*'), 'get', deviceData)
+Mock.mock(RegExp('api/devices/create/*'), 'post', 'success')
+Mock.mock(RegExp('api/devices/update/*'), 'post', 'success')
+Mock.mock(RegExp('api/devices/delete/*'), 'get', 'success')
 

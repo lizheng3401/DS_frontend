@@ -1,66 +1,64 @@
-
-
-1.×¢²á
-ÇëÇó½Ó¿Ú:http://sleeper.xiaopeng.site/api/Register
-ÇëÇóÍ·:
+1.æ³¨å†Œ
+è¯·æ±‚æ¥å£:http://sleeper.xiaopeng.site/api/Register
+è¯·æ±‚å¤´:
 Content-Type:application/json
-ÇëÇó·½Ê½:POST
-Êı¾İ(json¸ñÊ½):{"Phone":"18780271747","Password":"12345678","Name":"Ğ¤Åô","Sex":"ÄĞ","BirthDate":"1994-03-02"}
-¸ñÊ½»¯ºó£º
+è¯·æ±‚æ–¹å¼:POST
+æ•°æ®(jsonæ ¼å¼):{"Phone":"18780271747","Password":"12345678","Name":"è‚–é¹","Sex":"ç”·","BirthDate":"1994-03-02"}
+æ ¼å¼åŒ–åï¼š
 {
     "Phone": "18780271747",
     "Password": "12345678",
-    "Name": "Ğ¤Åô",
-    "Sex": "ÄĞ",
+    "Name": "è‚–é¹",
+    "Sex": "ç”·",
     "Birthdate": "1994-03-02"
 }
 
-·şÎñÆ÷·µ»ØÊı¾İ¸ñÊ½£º(flag:0±íÊ¾Ê§°Ü£¬1±íÊ¾³É¹¦)
+æœåŠ¡å™¨è¿”å›æ•°æ®æ ¼å¼ï¼š(flag:0è¡¨ç¤ºå¤±è´¥ï¼Œ1è¡¨ç¤ºæˆåŠŸ)
 {
     "Flag": "0",
-    "Message": "×¢²áÊ§°Ü£¬ÄúÒÑ×¢²á£¡"
+    "Message": "æ³¨å†Œå¤±è´¥ï¼Œæ‚¨å·²æ³¨å†Œï¼"
 }
 {
     "Flag": "1",
-    "Message": "×¢²á³É¹¦£¡"
+    "Message": "æ³¨å†ŒæˆåŠŸï¼"
 }
 
 
 
-2.µÇÂ¼
-ÇëÇó½Ó¿Ú:http://sleeper.xiaopeng.site/api/Login
-ÇëÇóÍ·:
+2.ç™»å½•
+è¯·æ±‚æ¥å£:http://sleeper.xiaopeng.site/api/Login
+è¯·æ±‚å¤´:
 Content-Type:application/json
-ÇëÇó·½Ê½:POST
-Êı¾İ(json¸ñÊ½):{"Phone":"18780271747","Password":"12345678"}
-¸ñÊ½»¯ºó£º
+è¯·æ±‚æ–¹å¼:POST
+æ•°æ®(jsonæ ¼å¼):{"Phone":"18780271747","Password":"12345678"}
+æ ¼å¼åŒ–åï¼š
 {
     "Phone": "18780271747",
     "Password": "12345678",
 }
 
-·µ»ØÊı¾İ£º(flag:0±íÊ¾Ê§°Ü£¬1±íÊ¾³É¹¦)
+è¿”å›æ•°æ®ï¼š(flag:0è¡¨ç¤ºå¤±è´¥ï¼Œ1è¡¨ç¤ºæˆåŠŸ)
 {
     "Flag": "1",
-    "Message": "µÇÂ¼³É¹¦!",
+    "Message": "ç™»å½•æˆåŠŸ!",
     "Token": "NAOAep5LbmaBtxxRGNqo03A/c7WeqhsteMCHPoKBySQSSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z2pAeKBH69WjH7iZYbCl3cM00o4X0GXTadPbxvGp4FKH"
 }
 
 {
     "Flag": "0",
-    "Message": "ÃÜÂë²»ÕıÈ·!"
+    "Message": "å¯†ç ä¸æ­£ç¡®!"
 }
 
 
 
-3.ÉÏ´«Ë¯ÃßÊı¾İ
-ÇëÇó½Ó¿Ú:http://sleeper.xiaopeng.site/api/DataUpload
-ÇëÇóÍ·£º
+3.ä¸Šä¼ ç¡çœ æ•°æ®
+è¯·æ±‚æ¥å£:http://sleeper.xiaopeng.site/api/DataUpload
+è¯·æ±‚å¤´ï¼š
 Content-Type:application/json
 Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z/o8V2fv2TiOwLQ33jKcsLhFni9uHgXQX3teepweLPwK
-ÇëÇó·½Ê½:POST
-Êı¾İ(json¸ñÊ½):{"StartTime": "22:16","EndTime": "7:38","MoveTimes": "7","DangerTimes": "1","HeartRate":"[53,67,88,76,78,75,69,73,71,77]","SleepData": "[5,6,5,6,6,5]","Date":"20180301"}
-¸ñÊ½»¯ºó£º
+è¯·æ±‚æ–¹å¼:POST
+æ•°æ®(jsonæ ¼å¼):{"StartTime": "22:16","EndTime": "7:38","MoveTimes": "7","DangerTimes": "1","HeartRate":"[53,67,88,76,78,75,69,73,71,77]","SleepData": "[5,6,5,6,6,5]","Date":"20180301"}
+æ ¼å¼åŒ–åï¼š
 {
     "StartTime": "22:16",
     "EndTime": "7:38",
@@ -70,24 +68,24 @@ Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+
     "SleepData": "[5,6,5,6,6,5]",
     "Date": "20180301"
 }
-·µ»ØÊı¾İ£º(flag:0±íÊ¾Ê§°Ü£¬1±íÊ¾³É¹¦)
+è¿”å›æ•°æ®ï¼š(flag:0è¡¨ç¤ºå¤±è´¥ï¼Œ1è¡¨ç¤ºæˆåŠŸ)
 {
     "Flag": "0",
-    "Message": "ÄúÒÑÉÏ´«¹ı20180302Êı¾İ,ÎŞĞèÖØ¸´ÉÏ´«!"
+    "Message": "æ‚¨å·²ä¸Šä¼ è¿‡20180302æ•°æ®,æ— éœ€é‡å¤ä¸Šä¼ !"
 }
 
 {
     "Flag": "1",
-    "Message": "Êı¾İÉÏ´«³É¹¦£¡"
+    "Message": "æ•°æ®ä¸Šä¼ æˆåŠŸï¼"
 }
 
-4.Ë¯ÃßÊı¾İ»ñÈ¡
-ÇëÇó½Ó¿Ú:http://sleeper.xiaopeng.site/api/DataDownload?Date=20180307
-	Date²ÎÊıÊÇÖ¸»ñÈ¡ÄÄÒ»ÌìµÄË¯ÃßÊı¾İ
-ÇëÇóÍ·£º
+4.ç¡çœ æ•°æ®è·å–
+è¯·æ±‚æ¥å£:http://sleeper.xiaopeng.site/api/DataDownload?Date=20180307
+	Dateå‚æ•°æ˜¯æŒ‡è·å–å“ªä¸€å¤©çš„ç¡çœ æ•°æ®
+è¯·æ±‚å¤´ï¼š
 Content-Type:application/json
 Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z/o8V2fv2TiOwLQ33jKcsLhFni9uHgXQX3teepweLPwK
-ÇëÇó·½Ê½:GET
+è¯·æ±‚æ–¹å¼:GET
 
 {
     "StartTime": "22:16",
@@ -99,59 +97,59 @@ Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+
     "Date": "20180302"
 }
 
-5.»ñÈ¡Ö¸¶¨ÈÕÆÚË¯Ãß½¡¿µÈËÊıÕ¼±È
-ÇëÇó½Ó¿Ú:http://sleeper.xiaopeng.site/api/SleepPercent?Date=20180301
-ÇëÇó·½Ê½£ºGET
-ÇëÇóÍ·:
+5.è·å–æŒ‡å®šæ—¥æœŸç¡çœ å¥åº·äººæ•°å æ¯”
+è¯·æ±‚æ¥å£:http://sleeper.xiaopeng.site/api/SleepPercent?Date=20180301
+è¯·æ±‚æ–¹å¼ï¼šGET
+è¯·æ±‚å¤´:
 Content-Type:application/json
 Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z/o8V2fv2TiOwLQ33jKcsLhFni9uHgXQX3teepweLPwK
-·µ»Ø½á¹û£º
+è¿”å›ç»“æœï¼š
 {
     "Flag": "1",
-    "Message": "Ë¯Ãß½¡¿µÈËÊı°Ù·Ö±È»ñÈ¡³É¹¦!",
+    "Message": "ç¡çœ å¥åº·äººæ•°ç™¾åˆ†æ¯”è·å–æˆåŠŸ!",
     "Percent": "67"
 }
 
 
-6.»ñÈ¡Ö¸¶¨ÈÕÆÚÊ§ÃßÈËÊıÕ¼±È
-ÇëÇó½Ó¿Ú:http://sleeper.xiaopeng.site/api/SleepBadPercent?Date=20180301
-ÇëÇó·½Ê½£ºGET
-ÇëÇóÍ·:
+6.è·å–æŒ‡å®šæ—¥æœŸå¤±çœ äººæ•°å æ¯”
+è¯·æ±‚æ¥å£:http://sleeper.xiaopeng.site/api/SleepBadPercent?Date=20180301
+è¯·æ±‚æ–¹å¼ï¼šGET
+è¯·æ±‚å¤´:
 Content-Type:application/json
 Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z/o8V2fv2TiOwLQ33jKcsLhFni9uHgXQX3teepweLPwK
-·µ»Ø½á¹û£º
+è¿”å›ç»“æœï¼š
 {
     "Flag": "1",
-    "Message": "Ê§ÃßÈËÊı°Ù·Ö±È»ñÈ¡³É¹¦!",
+    "Message": "å¤±çœ äººæ•°ç™¾åˆ†æ¯”è·å–æˆåŠŸ!",
     "Percent": "33"
 }
 
 
-7.»ñÈ¡Ö¸¶¨ÈÕÆÚË¯Ãß½¡¿µÈËÊıÕ¼±È
-ÇëÇó½Ó¿Ú:http://sleeper.xiaopeng.site/api/BreathPercent?Date=20180301
-ÇëÇó·½Ê½£ºGET
-ÇëÇóÍ·:
+7.è·å–æŒ‡å®šæ—¥æœŸç¡çœ å¥åº·äººæ•°å æ¯”
+è¯·æ±‚æ¥å£:http://sleeper.xiaopeng.site/api/BreathPercent?Date=20180301
+è¯·æ±‚æ–¹å¼ï¼šGET
+è¯·æ±‚å¤´:
 Content-Type:application/json
 Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z/o8V2fv2TiOwLQ33jKcsLhFni9uHgXQX3teepweLPwK
-·µ»Ø½á¹û£º
+è¿”å›ç»“æœï¼š
 {
     "Flag": "1",
-    "Message": "ºôÎüÕı³£ÈËÊı°Ù·Ö±È»ñÈ¡³É¹¦!",
+    "Message": "å‘¼å¸æ­£å¸¸äººæ•°ç™¾åˆ†æ¯”è·å–æˆåŠŸ!",
     "Percent": "94"
 }
 
 
 
-8.»ñÈ¡Ö¸¶¨ÈÕÆÚË¯Ãß½¡¿µÈËÊıÕ¼±È
-ÇëÇó½Ó¿Ú:http://sleeper.xiaopeng.site/api/BreathBadPercent?Date=20180301
-ÇëÇó·½Ê½£ºGET
-ÇëÇóÍ·:
+8.è·å–æŒ‡å®šæ—¥æœŸç¡çœ å¥åº·äººæ•°å æ¯”
+è¯·æ±‚æ¥å£:http://sleeper.xiaopeng.site/api/BreathBadPercent?Date=20180301
+è¯·æ±‚æ–¹å¼ï¼šGET
+è¯·æ±‚å¤´:
 Content-Type:application/json
 Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+uzB1dmM653z/o8V2fv2TiOwLQ33jKcsLhFni9uHgXQX3teepweLPwK
-·µ»Ø½á¹û£º
+è¿”å›ç»“æœï¼š
 {
     "Flag": "1",
-    "Message": "ºôÎüÒì³£ÈËÊı°Ù·Ö±È»ñÈ¡³É¹¦!",
+    "Message": "å‘¼å¸å¼‚å¸¸äººæ•°ç™¾åˆ†æ¯”è·å–æˆåŠŸ!",
     "Percent": "6"
 }
 
