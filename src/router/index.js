@@ -7,6 +7,8 @@ import Test from '@/components/page/Test'
 import OverView from '@/components/page/OverView'
 import UserInfo from '@/components/page/UserInfo'
 import DeviceInfo from '@/components/page/DeviceInfo'
+import AbnormalNew from '@/components/page/AbnormalNew'
+import AbnormalOld from '@/components/page/AbnormalOld'
 
 Vue.use(Router);
 
@@ -38,6 +40,14 @@ export default new Router({
           component: DeviceInfo
         },
         {
+          path: '/index/abnormal/users/new',
+          component: AbnormalNew
+        },
+        {
+          path: '/index/abnormal/users/old',
+          component: AbnormalOld
+        },
+        {
           path: 'BaseTable',
           component: BaseTable
         },
@@ -50,7 +60,7 @@ export default new Router({
           component: null,
         },
         {
-          path: 'test/:id',
+          path: 'test',
           component: Test
         },
       ]

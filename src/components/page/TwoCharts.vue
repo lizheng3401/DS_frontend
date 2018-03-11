@@ -8,7 +8,7 @@
   import {debounce} from '../../utils'
 
   export default {
-    name: "base-charts",
+    name: "two-charts",
     props: {
       className: {
         type: String,
@@ -67,90 +67,104 @@
       }
     },
     methods: {
-      setOptions: function ({ cate, expectedData, actualData } = {}) {
-        if (!cate){
-          cate = ''
-        }
+      setOptions: function ({ time, heart, breath } = {}) {
         this.chart.setOption({
-          title: {
-            text: '最近30天'+ cate +'折线图'
-          },
-          xAxis: {
-            data: ['1', '2', '3', '4', '5', '6', '7', '8', '9','10', '11', '12', '13', '14', '15', '16',
-            '17', '18', '19', '20', '21', '22', '23', '24', '25', '27', '28', '29', '30', '31'],
-            boundaryGap: false,
-            axisTick: {
-              show: false
-            }
-          },
-          grid: {
-            left: 10,
-            right: 10,
-            bottom: 20,
-            containLabel: true
-          },
+          title: [{
+            left: 'center',
+            text: '昨晚呼吸率变化情况'
+          }, {
+            top: '50%',
+            left: 'center',
+            text: '昨晚心率变化情况'
+          }],
           tooltip: {
             trigger: 'axis',
             axisPointer: {
               type: 'cross',
               label: {
                 backgroundColor: '#000000',
+                // formatter: '{value}'
               }
             },
             padding: [5, 10]
           },
-          yAxis: {
-            name: '人数',
+          xAxis: [{
+            data: time,
+            boundaryGap: false,
             axisTick: {
               show: false
             }
-          },
-          legend: {
-            data: [ '正常', '异常']
-          },
+          },{
+            data: time,
+            gridIndex: 1,
+            boundaryGap: false,
+            axisTick: {
+              show: false
+            }
+          }],
+          yAxis: [{
+            name: '次数/秒',
+            axisTick: {
+              show: false
+            }
+          }, {
+            name: '次数/秒',
+            axisTick: {
+              show: false
+            },
+            gridIndex: 1
+          }],
+          grid: [{
+            left:'3%',
+            right: '3%',
+            bottom: '55%',
+            containLabel: true
+          }, {
+            left:'3%',
+            right: '3%',
+            top: '55%',
+            containLabel: true
+          }],
           toolbox: {
             feature: {
               restore: {},
               saveAsImage: {},
             }
           },
-          series: [
-            {
-              name: '正常',
-              smooth: true,
-              type: 'line',
-              itemStyle: {
-                normal: {
-                  color: '#4bfa3f',
-                  lineStyle: {
-                    color: '#4bfa3f',
-                    width: 2
-                  }
-                }
-              },
-              data: actualData,
-              animationDuration: 2500,
-              animationEasing: 'quadraticOut'
-            },
-            {
-              name: '异常',
-              itemStyle: {
-                normal: {
+          series: [{
+            type: 'line',
+            smooth:true,
+            itemStyle: {
+              normal: {
+                color: '#FF005A',
+                lineStyle: {
                   color: '#FF005A',
-                  lineStyle: {
-                    color: '#FF005A',
-                    width: 2
-                  }
+                  width: 2
                 }
-              },
-              smooth: true,
-              type: 'line',
-              data: expectedData,
-              animationDuration: 2500,
-              animationEasing: 'cubicInOut'
-            }
-          ]
-        });
+              }
+            },
+            data: breath,
+            // animationDuration: 2800,
+            // animationEasing: 'cubicInOut'
+          }, {
+            type: 'line',
+            itemStyle: {
+              normal: {
+                color: '#3888fa',
+                lineStyle: {
+                  color: '#3888fa',
+                  width: 2
+                },
+              }
+            },
+            smooth:true,
+            data: heart,
+            // animationDuration: 5000,
+            // animationEasing: 'quadraticOut',
+            xAxisIndex: 1,
+            yAxisIndex: 1
+          }]
+        })
       },
       initChart: function () {
         this.chart = echarts.init(this.$el, 'dark');

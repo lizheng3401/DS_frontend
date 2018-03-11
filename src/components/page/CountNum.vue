@@ -1,32 +1,9 @@
 <template>
   <div class="components-container">
-    <count-to ref="example" class="example" :start-val="_startVal" :end-val="_endVal" :duration="_duration" :decimals="_decimals"
-              :separator="_separator" :prefix="_prefix" :suffix="_suffix" :autoplay="false"></count-to>
+    <count-to ref="example" class="example" :start-val="_startVal" :end-val="_endVal"
+              :suffix="_suffix" :autoplay="false"></count-to>
     <div style="margin-left: 25%;margin-top: 40px;">
-      <label class="label" for="startValInput">startVal:
-        <input type="number" v-model.number="setStartVal" name="startValInput" />
-      </label>
-      <label class="label" for="endValInput">endVal:
-        <input type="number" v-model.number="setEndVal" name="endVaInput" />
-      </label>
-      <label class="label" for="durationInput">duration:
-        <input type="number" v-model.number="setDuration" name="durationInput" />
-      </label>
       <div class="startBtn example-btn" @click="start">开始</div>
-      <div class="pause-resume-btn example-btn" @click="pauseResume">暂停/恢复</div>
-      <br/>
-      <label class="label" for="decimalsInput">decimals:
-        <input type="number" v-model.number="setDecimals" name="decimalsInput" />
-      </label>
-      <label class="label" for="separatorInput">separator:
-        <input v-model="setSeparator" name="separatorInput" />
-      </label>
-      <label class="label" for="prefixInput">prefix:
-        <input v-model="setPrefix" name="prefixInput" />
-      </label>
-      <label class="label" for="suffixInput">suffix:
-        <input v-model="setSuffix" name="suffixInput" />
-      </label>
     </div>
   </div>
 </template>
@@ -34,17 +11,14 @@
 <script>
   import countTo from 'vue-count-to'
   export default {
-    name: 'test',
+    name: 'count-num',
     components: { countTo },
     data() {
       return {
         setStartVal: 0,
-        setEndVal: 2017,
-        setDuration: 4000,
-        setDecimals: 0,
-        setSeparator: ',',
-        setSuffix: ' rmb',
-        setPrefix: '¥ '
+        setEndVal: 100,
+        setDuration: 3000,
+        setSuffix: ' 分',
       }
     },
     computed: {

@@ -48,24 +48,16 @@
           },
           {
             icon: 'el-icon-date',
-            index: '/index/form',
+            index: '/index/abnormal',
             title: '异常信息',
             subs: [
               {
-                index: '/index/form/baseform',
-                title: '基本表单'
+                index: '/index/abnormal/users/new',
+                title: '新增异常名单'
               },
               {
-                index: '/index/form/vueEditor',
-                title: '编辑器'
-              },
-              {
-                index: '/index/form/markdown',
-                title: 'markdown'
-              },
-              {
-                index: '/index/form/upload',
-                title: '文件上传'
+                index: '/index/abnormal/users/old',
+                title: '已有异常名单'
               }
             ]
           },

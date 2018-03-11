@@ -170,6 +170,36 @@ const totalDevices = function (opt) {
   }
 }
 
+const sleep = function (opt) {
+  // 'heart', 'breath', 'score', 'sleepPeriod'
+  var item = new Date('2018/3/2 22:13:34')
+  let time = []
+  let heart = []
+  let breath = []
+  let score = Random.natural(0,100)
+  let sleepPeroid = [
+    Random.float(0.5, 8, 1, 1),
+    Random.float(0.5, 8, 1, 1),
+    Random.float(0.5, 8, 1, 1),
+    Random.float(0.5, 8, 1, 1),
+  ]
+  for(let t = 0; t < 100; t++){
+    time.push(t+1)
+    heart.push(Random.natural(30, 80))
+    breath.push(Random.natural(8, 35))
+    // item = new Date(item + 60 * 1000);
+  }
+  return {
+    results: {
+      time: time,
+      heart: heart,
+      breath: breath,
+      // score: score,
+      // sleepPeroid: sleepPeroid
+    }
+  }
+}
+
 Mock.mock('/news', /post|get/i, produceData);
 Mock.mock('/users/', 'get',userData);
 Mock.mock('api/sleepData/1', 'get', sleepData);
@@ -211,4 +241,6 @@ Mock.mock(RegExp('api/devices/list/*'), 'get', deviceData)
 Mock.mock(RegExp('api/devices/create/*'), 'post', 'success')
 Mock.mock(RegExp('api/devices/update/*'), 'post', 'success')
 Mock.mock(RegExp('api/devices/delete/*'), 'get', 'success')
+
+Mock.mock(RegExp('api/data/user/*'), 'get', sleep)
 
