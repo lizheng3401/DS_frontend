@@ -27,7 +27,7 @@
             <li>评分 <span style="float: right">100</span></li>
           </ul>
         </el-card>
-        <el-card class="cardItem" style="height: 290px">
+        <el-card class="cardItem" style="height: 300px">
           <vue-seamless-scroll  :data="listData" :class-option="optionLeft">
             <ul>
               <li v-for="item in listData" @click="handlInfo(item.id)">

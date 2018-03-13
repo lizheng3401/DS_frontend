@@ -61,7 +61,6 @@
       chartData: {
         deep: true,
         handler: function (val) {
-          console.log(val)
           this.setOptions(val);
         }
       }

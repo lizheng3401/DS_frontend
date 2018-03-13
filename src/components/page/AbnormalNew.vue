@@ -6,17 +6,17 @@
           <two-charts ref="ch" :chartData="lineData" style="height: 500px"></two-charts>
         </el-col>
         <el-col :span="6" >
-          <base-pie  :chartData="pieData.sleepPeroid"  style="margin:0px;" width="100%" height="200px"></base-pie>
+          <base-pie :chartData="pieData.sleepPeroid"  style="margin:0px;" width="100%" height="200px"></base-pie>
           <countTo class="example" ref="num"  :start-val="_startVal" :end-val="_endVal" :prefix="_prefix" :suffix="_suffix" :autoplay="true"></countTo>
           <vue-seamless-scroll :data="listData" :class-option="optionLeft" class="seamless-warp">
-            <ul class="item">
-              <li v-for="item in listData" @click="getData(item.id)">
-                <span class="title" v-text="item.username" style="margin: 0px 10px"></span>
-                <el-tag type="warning" style="float: right;">{{item.date}}</el-tag>
-                <el-tag type="danger" style="float:right; margin-right: 50px">{{item.info}}</el-tag>
-              </li>
-            </ul>
-          </vue-seamless-scroll>
+              <ul>
+                <li v-for="item in listData" @click="getData(item.id)">
+                  <span class="title" v-text="item.username"></span>
+                  <el-tag type="warning">{{item.date}}</el-tag>
+                  <el-tag type="danger">{{item.info}}</el-tag>
+                </li>
+              </ul>
+            </vue-seamless-scroll>
         </el-col>
       </el-row>
     </div>
@@ -313,7 +313,7 @@
     background-color: #282828
   }
   .seamless-warp {
-    height: 225px;
+    height: 232px;
     overflow: hidden;
     background-color: #282828;
     color: #1efb0a;

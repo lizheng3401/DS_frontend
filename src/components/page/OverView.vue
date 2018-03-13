@@ -90,7 +90,6 @@
           url: url,
           method: 'Get'
         }).then((response) => {
-          console.log(JSON.stringify(response.data.cate, null, 2));
           this.topChartData = response.data
         }).catch( function (error) {
           console.log(error);
