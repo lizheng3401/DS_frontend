@@ -1,27 +1,46 @@
 <template>
   <div>
-    <countTo class="example" ref="num"  :start-val="_startVal" :end-val="_endVal" :suffix="_suffix" :autoplay="true" style="float:left"></countTo>
-    <two-charts ref="ch" :chartData="lineData" style="height: 600px"></two-charts>
+    <div>
+      <el-row>
+        <el-col :span="18">
+          <two-charts ref="ch" :chartData="lineData" style="height: 500px"></two-charts>
+        </el-col>
+        <el-col :span="6" >
+          <base-pie style="margin:0px;" width="100%" height="200px"></base-pie>
+          <countTo class="example" ref="num"  :start-val="_startVal" :end-val="_endVal" :prefix="_prefix" :suffix="_suffix" :autoplay="true"></countTo>
+          <vue-seamless-scroll :data="listData" :class-option="optionLeft" class="seamless-warp">
+            <ul class="item">
+              <li v-for="item in listData">
+                <span class="title" v-text="item.title"></span><el-tag type="danger" style="float:right">{{item.date}}</el-tag>
+              </li>
+            </ul>
+          </vue-seamless-scroll>
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
 <script>
   import TwoCharts from './TwoCharts'
   import countTo from 'vue-count-to'
-
+  import BasePie from './BasePie'
+  import vueSeamlessScroll from 'vue-seamless-scroll'
   export default {
     name: "abnormal-new",
     components:{
       TwoCharts,
-      countTo
+      countTo,
+      BasePie,
+      vueSeamlessScroll
     },
     data: function () {
       return {
         setStartVal: 0,
         setEndVal: 100,
         setDuration: 4000,
-        setSuffix: ' 分',
-        setPrefix: '睡眠评分 ',
+        setSuffix: '',
+        setPrefix: '评分 ',
         lineData: {
           time: [
             1,
@@ -180,6 +199,40 @@
             30
           ]
         },
+        listData: [{
+          'title': '无缝滚动第一行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第二行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第三行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第四行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第五行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第五行',
+          'date': '2017-12-16'
+        },{
+          'title': '无缝滚动第五行',
+          'date': '2017-12-16'
+        },{
+          'title': '无缝滚动第五行',
+          'date': '2017-12-16'
+        },{
+          'title': '无缝滚动第五行',
+          'date': '2017-12-16'
+        },{
+          'title': '无缝滚动第五行',
+          'date': '2017-12-16'
+        },{
+          'title': '无缝滚动第五行',
+          'date': '2017-12-16'
+        }],
       }
     },
     computed: {
@@ -223,6 +276,11 @@
       },
       _prefix() {
         return this.setPrefix
+      },
+      optionLeft () {
+        return {
+          limitMoveNum: 5
+        }
       }
     },
     methods:{
@@ -257,9 +315,14 @@
     font-size: 50px;
     color: #F6416C;
     display: block;
-    margin: 10px 0;
     text-align: center;
-    font-size: 80px;
     font-weight: 500;
+    background-color: #282828
+  }
+  .seamless-warp {
+    height: 225px;
+    overflow: hidden;
+    background-color: #282828;
+    color: #1efb0a;
   }
 </style>

@@ -117,12 +117,12 @@
           grid: [{
             left:'3%',
             right: '3%',
-            bottom: '55%',
+            bottom: '60%',
             containLabel: true
           }, {
             left:'3%',
             right: '3%',
-            top: '55%',
+            top: '60%',
             containLabel: true
           }],
           toolbox: {
