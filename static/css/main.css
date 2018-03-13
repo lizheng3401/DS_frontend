@@ -20,4 +20,6 @@ body{
   overflow-y: scroll;
 }
 
-a{text-decoration: none}
+a{
+  text-decoration: none;
+}

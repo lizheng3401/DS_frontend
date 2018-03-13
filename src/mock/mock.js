@@ -1,9 +1,5 @@
 const Mock = require('mockjs')
-const data = Mock.mock({
-  'list|1-10': [{
-    'id|+1': 1
-  }]
-})
+
 const Random = Mock.Random;
 const produceData = function (opt) {
   let articles = [];
@@ -178,10 +174,10 @@ const sleep = function (opt) {
   let breath = []
   let score = Random.natural(0,100)
   let sleepPeroid = [
-    Random.float(0.5, 8, 1, 1),
-    Random.float(0.5, 8, 1, 1),
-    Random.float(0.5, 8, 1, 1),
-    Random.float(0.5, 8, 1, 1),
+    {value:Random.float(0.5, 8, 1, 1), name:'觉醒期'},
+    {value:Random.float(0.5, 8, 1, 1), name:'浅睡I期'},
+    {value:Random.float(0.5, 8, 1, 1), name:'浅睡II期'},
+    {value:Random.float(0.5, 8, 1, 1), name:'深睡期'},
   ]
   for(let t = 0; t < 100; t++){
     time.push(t+1)
@@ -191,15 +187,84 @@ const sleep = function (opt) {
   }
   return {
     results: {
+      userId: Random.id(),
+      username: Random.cname(),
       time: time,
       heart: heart,
       breath: breath,
-      // score: score,
-      // sleepPeroid: sleepPeroid
+      score: score,
+      sleepPeroid: sleepPeroid
     }
   }
 }
 
+const abnormalList = function (opt) {
+  let users_list = []
+  for(let i = 0; i < 10; i++)
+  {
+    let newObject = {
+      userId: i+1,
+      username: Random.cname(),
+      date: Random.date(),
+      info: ['heart', 'breath'][Random.natural(0, 1)]
+    }
+    users_list.push(newObject)
+  }
+
+  return {
+    results: {
+      users_list: users_list
+    }
+  }
+}
+
+const avgHB = function (opt) {
+  let time = []
+  let heart = []
+  let breath = []
+  // let score = []
+  for(var i = 0; i < 30; i++)
+  {
+    time.push(i+1)
+    heart.push(Random.natural(30, 80))
+    breath.push(Random.natural(8, 35))
+    // score.push(Random.natural(0, 100))
+  }
+
+  return {
+    results: {
+      "time": time,
+      "heart":heart,
+      "breath": breath,
+    }
+  }
+}
+
+const avgSleep = function (opt) {
+  let sleepN1 = []
+  let sleepN2 = []
+  let sleepN3 = []
+  let sleepN4 = []
+  let time = []
+  for(var i = 0; i < 7; i++)
+  {
+    time.push(i+1)
+    sleepN1.push(Random.float(0.5, 8, 1, 1))
+    sleepN2.push(Random.float(0.5, 8, 1, 1))
+    sleepN3.push(Random.float(0.5, 8, 1, 1))
+    sleepN4.push(Random.float(0.5, 8, 1, 1))
+  }
+
+  return {
+    results: {
+      // time:time,
+      "sleepN1": sleepN1,
+      "sleepN2": sleepN2,
+      "sleepN3": sleepN3,
+      "sleepN4": sleepN4,
+    }
+  }
+}
 Mock.mock('/news', /post|get/i, produceData);
 Mock.mock('/users/', 'get',userData);
 Mock.mock('api/sleepData/1', 'get', sleepData);
@@ -243,4 +308,9 @@ Mock.mock(RegExp('api/devices/update/*'), 'post', 'success')
 Mock.mock(RegExp('api/devices/delete/*'), 'get', 'success')
 
 Mock.mock(RegExp('api/data/user/*'), 'get', sleep)
+Mock.mock('api/users/abnormal/list', 'get', abnormalList)
+
+Mock.mock(RegExp('api/avg/data/users/HB*'), 'get', avgHB)
+Mock.mock(RegExp('api/avg/users/sleepData*'), 'get', avgSleep)
+
 

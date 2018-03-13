@@ -61,13 +61,12 @@
       chartData: {
         deep: true,
         handler: function (val) {
-          console.log(val)
           this.setOptions(val);
         }
       }
     },
     methods: {
-      setOptions: function ({ cate, expectedData, actualData } = {}) {
+      setOptions: function (data) {
         this.chart.setOption({
           title : {
             text: '各睡眠时期时间对比',
@@ -84,12 +83,7 @@
               type: 'pie',
               radius : '55%',
               center: ['50%', '60%'],
-              data:[
-                {value:2.5, name:'觉醒期'},
-                {value:2.5, name:'浅睡I期'},
-                {value:2.5, name:'浅睡II期'},
-                {value:2.5, name:'深睡期'},
-              ],
+              data:data,
               itemStyle: {
                 emphasis: {
                   shadowBlur: 10,

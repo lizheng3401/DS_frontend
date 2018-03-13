@@ -6,12 +6,14 @@
           <two-charts ref="ch" :chartData="lineData" style="height: 500px"></two-charts>
         </el-col>
         <el-col :span="6" >
-          <base-pie style="margin:0px;" width="100%" height="200px"></base-pie>
+          <base-pie  :chartData="pieData.sleepPeroid"  style="margin:0px;" width="100%" height="200px"></base-pie>
           <countTo class="example" ref="num"  :start-val="_startVal" :end-val="_endVal" :prefix="_prefix" :suffix="_suffix" :autoplay="true"></countTo>
           <vue-seamless-scroll :data="listData" :class-option="optionLeft" class="seamless-warp">
             <ul class="item">
-              <li v-for="item in listData">
-                <span class="title" v-text="item.title"></span><el-tag type="danger" style="float:right">{{item.date}}</el-tag>
+              <li v-for="item in listData" @click="getData(item.id)">
+                <span class="title" v-text="item.username" style="margin: 0px 10px"></span>
+                <el-tag type="warning" style="float: right;">{{item.date}}</el-tag>
+                <el-tag type="danger" style="float:right; margin-right: 50px">{{item.info}}</el-tag>
               </li>
             </ul>
           </vue-seamless-scroll>
@@ -40,7 +42,7 @@
         setEndVal: 100,
         setDuration: 4000,
         setSuffix: '',
-        setPrefix: '评分 ',
+        setPrefix: '',
         lineData: {
           time: [
             1,
@@ -197,42 +199,13 @@
             22,
             15,
             30
-          ]
+          ],
         },
-        listData: [{
-          'title': '无缝滚动第一行',
-          'date': '2017-12-16'
-        }, {
-          'title': '无缝滚动第二行',
-          'date': '2017-12-16'
-        }, {
-          'title': '无缝滚动第三行',
-          'date': '2017-12-16'
-        }, {
-          'title': '无缝滚动第四行',
-          'date': '2017-12-16'
-        }, {
-          'title': '无缝滚动第五行',
-          'date': '2017-12-16'
-        }, {
-          'title': '无缝滚动第五行',
-          'date': '2017-12-16'
-        },{
-          'title': '无缝滚动第五行',
-          'date': '2017-12-16'
-        },{
-          'title': '无缝滚动第五行',
-          'date': '2017-12-16'
-        },{
-          'title': '无缝滚动第五行',
-          'date': '2017-12-16'
-        },{
-          'title': '无缝滚动第五行',
-          'date': '2017-12-16'
-        },{
-          'title': '无缝滚动第五行',
-          'date': '2017-12-16'
-        }],
+        pieData:{
+          sleepPeroid: [],
+          score: 0,
+        },
+        listData: [],
       }
     },
     computed: {
@@ -284,28 +257,48 @@
       }
     },
     methods:{
-      getData(){
+      getData(userId){
         this.$http({
           url: 'api/data/user/',
           method: 'get',
           params:{
-            id: 1,
+            id: userId,
             type: ['heart', 'breath', 'score', 'sleepPeriod'],
             interval: 'minutes'
           }
         }).then( resp => {
-          this.lineData = resp.data.results
-          console.log(JSON.stringify(this.lineData, null, 2))
+          this.lineData = {
+            time:resp.data.results.time,
+            heart:resp.data.results.heart,
+            breath:resp.data.results.breath,
+          };
+          this.pieData = {
+            sleepPeroid: resp.data.results.sleepPeroid,
+            score: resp.data.results.score,
+          }
+          this.setEndVal = this.pieData.score
+          this.setPrefix = resp.data.results.username+ " "
+        }).catch( function (error) {
+          console.log(error)
+        })
+      },
+      getListData(){
+        this.$http({
+          url: 'api/users/abnormal/list',
+          method:'get',
+        }).then( response =>{
+          this.listData = response.data.results.users_list
         }).catch( function (error) {
           console.log(error)
         })
       },
       start:function () {
         this.$refs.num.start()
-      }
+      },
     },
     created: function () {
-      this.getData()
+      this.getData(1)
+      this.getListData()
     }
   }
 </script>
@@ -324,5 +317,8 @@
     overflow: hidden;
     background-color: #282828;
     color: #1efb0a;
+  }
+  li:hover{
+    background-color: #63635b;
   }
 </style>
