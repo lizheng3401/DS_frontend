@@ -6,25 +6,25 @@
         <stack-bar :chartData="sleepData" ></stack-bar>
       </el-col>
       <el-col :span="6">
-        <span class="example">起床时 89</span>
+        <span class="example">胡芳 86</span>
         <el-card class="cardItem">
           <ul style=" list-style:none;">
-            <li>入睡时间<span style="float: right">23:59:00</span></li>
-            <li>起床时间<span style="float: right">7:59:00</span></li>
+            <li>入睡时间<span style="float: right">23:24:00</span></li>
+            <li>起床时间<span style="float: right">8:37:00</span></li>
             <li>心率 <span style="float: right">75</span></li>
-            <li>呼吸率 <span style="float: right">26</span></li>
+            <li>呼吸率 <span style="float: right">19</span></li>
             <li>体动 <span style="float: right">40</span></li>
-            <li>评分 <span style="float: right">100</span></li>
+            <li>评分 <span style="float: right">86</span></li>
           </ul>
         </el-card>
         <el-card class="cardItem">
           <ul style=" list-style:none;">
-            <li>入睡时间<span style="float: right">23:59:00</span></li>
-            <li>起床时间<span style="float: right">7:59:00</span></li>
-            <li>心率 <span style="float: right">75</span></li>
-            <li>呼吸率 <span style="float: right">26</span></li>
-            <li>体动 <span style="float: right">40</span></li>
-            <li>评分 <span style="float: right">100</span></li>
+            <li>睡眠时长<span style="float: right">9小时13分</span></li>
+            <li>深睡期占比<span style="float: right">21%</span></li>
+            <li>心率 <span style="float: right">正常</span></li>
+            <li>呼吸率 <span style="float: right">正常</span></li>
+            <li>体动 <span style="float: right">较多</span></li>
+            <li>评分 <span style="float: right">优</span></li>
           </ul>
         </el-card>
         <el-card class="cardItem" style="height: 300px">

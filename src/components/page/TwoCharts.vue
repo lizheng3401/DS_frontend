@@ -89,12 +89,14 @@
           },
           xAxis: [{
             data: time,
+            type : 'category',
             boundaryGap: false,
             axisTick: {
               show: false
             }
           },{
             data: time,
+            type : 'category',
             gridIndex: 1,
             boundaryGap: false,
             axisTick: {
@@ -102,12 +104,12 @@
             }
           }],
           yAxis: [{
-            name: '次数/秒',
+            name: '次数/分钟',
             axisTick: {
               show: false
             }
           }, {
-            name: '次数/秒',
+            name: '次数/分钟',
             axisTick: {
               show: false
             },

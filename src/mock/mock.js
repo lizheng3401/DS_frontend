@@ -82,54 +82,114 @@ const sleepData = function (opt) {
   return sleep
 };
 const sleepusers = function (opt) {
+  function timetrans(date){
+    var date = new Date(date);//如果date为13位不需要乘1000
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+    var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+    var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+    var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
+    return Y+M+D;
+  }
+  var item = Date.parse(new Date('2018/2/2 00:00:00'))
   let result = {
     cate: '睡眠',
     expectedData: [],
     actualData:[],
+    time: [],
   };
-  for (let i = 0; i < 31; i++)
+  for (let i = 0; i < 30; i++)
   {
-    result.expectedData.push(Random.natural(10, 1000));
-    result.actualData.push(Random.natural(500, 10000))
+    let num = Random.natural(7000, 10000)
+    item = item + 60*1000*60*24;
+    result.time.push(timetrans(item))
+    result.actualData.push(num)
+    result.expectedData.push(parseInt(num*0.25));
   }
   return result
 };
 const breathusers = function (opt) {
+  function timetrans(date){
+    var date = new Date(date);//如果date为13位不需要乘1000
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+    var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+    var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+    var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
+    return Y+M+D;
+  }
+  var item = Date.parse(new Date('2018/2/2 00:00:00'))
   let result = {
     cate: '呼吸率',
     expectedData: [],
     actualData:[],
+    time: [],
   };
-  for (let i = 0; i < 31; i++)
+  for (let i = 0; i < 30; i++)
   {
-    result.expectedData.push(Random.natural(0, 10));
-    result.actualData.push(Random.natural(10, 30))
+    let num = Random.natural(7000, 10000)
+    item = item + 60*1000*60*24;
+    result.time.push(timetrans(item))
+    result.actualData.push(num)
+    result.expectedData.push(parseInt(num*0.25));
   }
   return result
 };
 const heartusers = function (opt) {
+  function timetrans(date){
+    var date = new Date(date);//如果date为13位不需要乘1000
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+    var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+    var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+    var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
+    return Y+M+D;
+  }
+  var item = Date.parse(new Date('2018/2/2 00:00:00'))
   let result = {
     cate: '心率',
     expectedData: [],
     actualData:[],
+    time: [],
   };
-  for (let i = 0; i < 31; i++)
+  for (let i = 0; i < 30; i++)
   {
-    result.expectedData.push(Random.natural(0, 30));
-    result.actualData.push(Random.natural(30, 80))
+    let num = Random.natural(7000, 10000)
+    item = item + 60*1000*60*24;
+    result.time.push(timetrans(item))
+    result.actualData.push(num)
+    result.expectedData.push(parseInt(num*0.25));
   }
   return result
 }
 const moveusers = function (opt) {
+  function timetrans(date){
+    var date = new Date(date);//如果date为13位不需要乘1000
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+    var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+    var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+    var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
+    return Y+M+D;
+  }
+  var item = Date.parse(new Date('2018/2/2 00:00:00'))
   let result = {
     cate: '体动',
     expectedData: [],
     actualData:[],
+    time: [],
   };
-  for (let i = 0; i < 31; i++)
+  for (let i = 0; i < 30; i++)
   {
-    result.expectedData.push(Random.natural(0, 10));
-    result.actualData.push(Random.natural(10, 100))
+    let num = Random.natural(7000, 10000)
+    item = item + 60*1000*60*24;
+    result.time.push(timetrans(item))
+    result.actualData.push(num)
+    result.expectedData.push(parseInt(num*0.25));
   }
   return result
 }
@@ -165,25 +225,35 @@ const totalDevices = function (opt) {
     total: 100
   }
 }
-
 const sleep = function (opt) {
   // 'heart', 'breath', 'score', 'sleepPeriod'
-  var item = new Date('2018/3/2 22:13:34')
+  function timetrans(date){
+    var date = new Date(date);//如果date为13位不需要乘1000
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+    var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+    var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+    var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
+    return h+m+s;
+  }
+  var item = Date.parse(new Date('2018/3/2 22:13:34'))
   let time = []
   let heart = []
   let breath = []
   let score = Random.natural(0,100)
   let sleepPeroid = [
-    {value:Random.float(0.5, 8, 1, 1), name:'觉醒期'},
-    {value:Random.float(0.5, 8, 1, 1), name:'浅睡I期'},
-    {value:Random.float(0.5, 8, 1, 1), name:'浅睡II期'},
-    {value:Random.float(0.5, 8, 1, 1), name:'深睡期'},
+    {value:0.5, name:'觉醒期'},
+    {value:2.0, name:'浅睡I期'},
+    {value:3.5, name:'浅睡II期'},
+    {value:2, name:'深睡期'},
   ]
-  for(let t = 0; t < 100; t++){
-    time.push(t+1)
-    heart.push(Random.natural(30, 80))
-    breath.push(Random.natural(8, 35))
-    // item = new Date(item + 60 * 1000);
+  for(let t = 0; t < 550; t++){
+    // time.push(t+1)
+    heart.push(Random.natural(60, 100))
+    breath.push(Random.natural(10, 20))
+    item = item + 60*1000;
+    time.push(timetrans(item))
   }
   return {
     results: {
@@ -197,7 +267,6 @@ const sleep = function (opt) {
     }
   }
 }
-
 const abnormalList = function (opt) {
   let users_list = []
   for(let i = 0; i < 10; i++)
@@ -217,17 +286,28 @@ const abnormalList = function (opt) {
     }
   }
 }
-
 const avgHB = function (opt) {
+  function timetrans(date){
+    var date = new Date(date);//如果date为13位不需要乘1000
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+    var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+    var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+    var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
+    return M+D;
+  }
+  var item = Date.parse(new Date('2018/2/2'))
   let time = []
   let heart = []
   let breath = []
   // let score = []
   for(var i = 0; i < 30; i++)
   {
-    time.push(i+1)
-    heart.push(Random.natural(30, 80))
-    breath.push(Random.natural(8, 35))
+    item = item + 60*1000*60*24;
+    time.push(timetrans(item))
+    heart.push(Random.natural(60, 100))
+    breath.push(Random.natural(10, 20))
     // score.push(Random.natural(0, 100))
   }
 
@@ -239,7 +319,6 @@ const avgHB = function (opt) {
     }
   }
 }
-
 const avgSleep = function (opt) {
   let sleepN1 = []
   let sleepN2 = []
@@ -258,13 +337,14 @@ const avgSleep = function (opt) {
   return {
     results: {
       // time:time,
-      "sleepN1": sleepN1,
-      "sleepN2": sleepN2,
-      "sleepN3": sleepN3,
-      "sleepN4": sleepN4,
+      "sleepN1": [0.5,0.4,0.6,0.3,0.8,0.5,0.7],
+      "sleepN2": [2.0, 2.1, 1.9, 2.5, 2.2, 2.0, 2.8],
+      "sleepN3": [3.5, 3.0, 3.4, 3.1, 3.3, 3.4, 3.0],
+      "sleepN4": [2.0 ,1.8, 2.1, 1.9, 1.7, 2.0, 2.1],
     }
   }
 }
+
 Mock.mock('/news', /post|get/i, produceData);
 Mock.mock('/users/', 'get',userData);
 Mock.mock('api/sleepData/1', 'get', sleepData);
@@ -289,10 +369,10 @@ Mock.mock(RegExp('api/heart/users*'), 'get', heartusers);
 Mock.mock(RegExp('api/breath/users*'), 'get', breathusers);
 Mock.mock(RegExp('api/move/users*'), 'get', moveusers);
 
-Mock.mock(RegExp('sleepPercent/*'),'get',{'Percent': Random.natural(0, 100)} );
-Mock.mock(RegExp('breathPercent/*'),'get', {'Percent': Random.natural(0, 100)});
-Mock.mock(RegExp('breathBadPercent/*'),'get', {'Percent': Random.natural(0, 100)});
-Mock.mock(RegExp('sleepBadPercent/*'),'get', {'Percent': Random.natural(0, 100)});
+Mock.mock(RegExp('sleepPercent/*'),'get',{'Percent': 83} );
+Mock.mock(RegExp('breathPercent/*'),'get', {'Percent': 84});
+Mock.mock(RegExp('breathBadPercent/*'),'get', {'Percent': 80});
+Mock.mock(RegExp('sleepBadPercent/*'),'get', {'Percent': 87 });
 
 
 Mock.mock('api/users/lists/', 'get', totalUsers)

@@ -96,7 +96,7 @@
             padding: [5, 10]
           },
           yAxis: [{
-            name: '次/每秒',
+            name: '次/分钟',
             axisTick: {
               show: false
             }
@@ -124,7 +124,7 @@
                   }
                 }
               },
-              data: breath,
+              data: heart,
             },
             {
               name: '平均呼吸率',
@@ -139,7 +139,7 @@
               },
               smooth: true,
               type: 'line',
-              data: heart,
+              data: breath,
             }
           ]
         });
