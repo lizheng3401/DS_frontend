@@ -159,7 +159,7 @@
             z: 3,
             label: {
               normal: {
-                position: ['45%', '10%'],
+                position: 'top',
                 show: true
               }
             },
