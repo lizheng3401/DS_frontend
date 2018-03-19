@@ -345,6 +345,51 @@ const avgSleep = function (opt) {
   }
 }
 
+const yesterday = function (opt) {
+  function timetrans(date){
+    var date = new Date(date);//如果date为13位不需要乘1000
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+    var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+    var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+    var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
+    return h+m+s;
+  }
+  let item = Date.parse(new Date('2018/2/2 19:00:00'))
+  let time = [];
+  let peroid = ['<2', '2~3', '3~4', '4~5', '5~6', '6~7', '7~8', '8~9', '>9']
+  let Sleep_people = []
+  let peroidPeople = [50, 100, 150, 250, 400, 2000, 5000, 2000,200]
+  for(let i = 0; i < 28; i++)
+  {
+    item = item + 60*1000*30;
+    time.push(timetrans(item))
+    Sleep_people.push(Random.natural(100,1000))
+  }
+  let socorePercent = [
+    {name: '<50', value: 1000},
+    {name: '50~70', value: 2000},
+    {name: '70~90', value: 6000},
+    {name: '90~100', value: 1000}
+  ]
+  let DeepSleepPercent = [
+    {name: '<0.1', value: 1000},
+    {name: '0.1~0.2', value: 2000},
+    {name: '0.2~0.25', value: 6000},
+    {name: '>0.25', value: 1000}
+  ]
+  return {
+    results: {
+      time,
+      Sleep_people,
+      peroid,
+      peroidPeople,
+      socorePercent,
+      DeepSleepPercent
+    }
+  }
+}
 Mock.mock('/news', /post|get/i, produceData);
 Mock.mock('/users/', 'get',userData);
 Mock.mock('api/sleepData/1', 'get', sleepData);
@@ -392,5 +437,7 @@ Mock.mock('api/users/abnormal/list', 'get', abnormalList)
 
 Mock.mock(RegExp('api/avg/data/users/HB*'), 'get', avgHB)
 Mock.mock(RegExp('api/avg/users/sleepData*'), 'get', avgSleep)
+
+Mock.mock(RegExp('api/yesterday/'), 'get', yesterday)
 
 

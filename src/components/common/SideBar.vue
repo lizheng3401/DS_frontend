@@ -63,12 +63,12 @@
           },
           {
             icon: 'el-icon-star-on',
-            index: '/index/BaseCharts',
+            index: '/index/history',
             title: '历史数据'
           },
           {
             icon: 'el-icon-upload2',
-            index: '/index/test',
+            index: '/index/yesterday',
             title: '昨晚睡眠情况'
           }
         ]

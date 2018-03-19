@@ -9,6 +9,8 @@ import UserInfo from '@/components/page/UserInfo'
 import DeviceInfo from '@/components/page/DeviceInfo'
 import AbnormalNew from '@/components/page/AbnormalNew'
 import AbnormalOld from '@/components/page/AbnormalOld'
+import Yesterday from '@/components/page/Yesterday'
+import History from '@/components/page/History'
 
 Vue.use(Router);
 
@@ -48,16 +50,16 @@ export default new Router({
           component: AbnormalOld
         },
         {
-          path: 'BaseTable',
-          component: BaseTable
+          path: '/index/yesterday',
+          component: Yesterday
         },
         {
           path: 'overview',
           component: OverView,
         },
         {
-          path: 'deviceTable',
-          component: null,
+          path: '/index/history',
+          component: History,
         },
         {
           path: 'test',
