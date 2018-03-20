@@ -44,7 +44,7 @@
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="handleUpdate(scope.row)">编辑</el-button>
           <el-button type="info" size="small" @click="detailUser(scope.row.id)">详情</el-button>
-          <el-button type="danger " size="small" @click="handleDelete(scope.row.id)">删除</el-button>
+          <el-button type="danger " size="small" @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -86,7 +86,22 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogEditVisible = false">取 消</el-button>
-        <el-button type="primary" @click="updateUser">确 定</el-button>
+        <el-button type="primary" @click="updateUser(updateForm)">确 定</el-button>
+      </div>
+    </el-dialog>
+    <el-dialog title="查看用户" :visible.sync="dialogShowVisible" >
+      <ul style=" list-style:none;font-size: 20px; text-align: center">
+        <li>用户: {{userForm.username}}</li>
+        <li>入睡时间: 23:24:00</li>
+        <li>起床时间: 8:37:00</li>
+        <li>心率: 75</li>
+        <li>呼吸率: 19</li>
+        <li>体动: 40</li>
+        <li>评分: 86</li>
+      </ul>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogShowVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogShowVisible = false">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -100,9 +115,11 @@
         Data: [],
         dialogFormVisible: false,
         dialogEditVisible: false,
+        dialogShowVisible: false,
         formLabelWidth: "100px",
         form:{},
         updateForm: {},
+        userForm: {},
         listQuery: {
           username: undefined,
           page: 1,
@@ -137,22 +154,29 @@
     },
     methods: {
       getData: function() {
+        const self = this
         this.$http({
           url: "api/users/list/*",
           method: "Get",
           params: this.listQuery
         })
           .then(response => {
-            this.Data = response.data.results
-            this.total = response.data.total
+            self.Data = response.data.results
+            self.total = response.data.total
           })
           .catch(function(error) {
             console.log(error);
           });
       },
       handleSearch: function () {
+        const self = this
         this.listQuery.page = 1
         this.getData()
+        console.log(JSON.stringify(this.listQuery, null, 2))
+        this.Data.forEach(function (element) {
+          console.log(element)
+          element.status = self.listQuery.status
+        })
         this.listQuery.username = ''
         this.listQuery.status = ''
       },
@@ -160,14 +184,14 @@
         this.dialogFormVisible = true;
       },
       handleExport: function () {
+        const self = this
         import('../../utils/export2excel').then( excel => {
           const tHeader = ['ID', '用户名', '电子邮件', '设备ID', '昨晚睡眠状态', '健康状态']
-          const data = this.getTotalUsers()
-          console.log(data)
-          excel.export_json_to_excel(tHeader, data, 'table-list')
+          const data = self.getTotalUsers()
+          excel.export_json_to_excel(tHeader, data, 'users-list')
         }).catch(function (error) {
           console.log(error);
-          this.$message({
+          self.$message({
             type: 'warning',
             message: '导出失败'
           })
@@ -197,11 +221,10 @@
       },
       handleUpdate: function (user) {
         this.dialogEditVisible = true
-        this.updateForm.userId = user.id
-        this.updateForm.username = user.username
-        this.updateForm.email = user.email
+        this.updateForm = user
       },
       createUser: function () {
+        const self = this
         if(!(this.form.password === this.form.Repassword))
         {
           this.$message({
@@ -220,23 +243,30 @@
           }
         }).then( (resp) => {
           if(resp.data === 'success'){
-            this.dialogFormVisible = false;
-            this.$message({
+            self.dialogFormVisible = false;
+            let user = {
+              username: self.form.username,
+              id: 11
+            }
+            self.Data.splice(0,1, user)
+            console.log(self.form)
+            self.$message({
               message: '添加成功',
               center: true
             });
           }
         }).catch(function (error) {
-          this.dialogFormVisible = false;
+          self.dialogFormVisible = false;
           console.log(error);
-          this.$message({
+          self.$message({
             message: '添加失败',
             type: 'error',
             center: true
           });
         })
       },
-      updateUser: function () {
+      updateUser: function (user) {
+        const self = this
         this.$http({
           url: 'api/users/update',
           method: 'post',
@@ -247,10 +277,18 @@
           }
         }).then( (resp) => {
           if(resp.data === 'success'){
+            for (const v of self.Data) {
+              if (v.id === user.id) {
+                v.username = user.username
+                v.email = user.email
+                break
+              }
+            }
             this.dialogEditVisible = false;
             this.$message({
               message: '修改成功',
-              center: true
+              center: true,
+              type: 'success'
             });
           }
         }).catch( function (error) {
@@ -264,28 +302,32 @@
         })
       },
       detailUser: function (userId) {
-        this.$router.push('/index/test/'+userId)
+        this.dialogShowVisible = true
+        this.userForm = this.Data[userId - 1]
       },
-      deleteUser: function (userId) {
+      deleteUser: function (row) {
+        const self = this
         this.$http({
           url: 'api/users/delete/',
           method: 'get',
           params: {
-            id:userId
+            id:row.id
           }
         }).then((resp) => {
-
+          const index = self.Data.indexOf(row)
+          console.log(row)
+          self.Data.splice(index, 1)
         }).catch( function (error) {
           console.log(error);
         })
       },
       getTotalUsers: function () {
+        var data = []
         this.$http({
           url: 'api/users/lists/',
           method: 'get'
         }).then( (resp) => {
           const filterVal = ['id', 'username', 'email', 'device','sleep','status']
-          var data = []
           for(let i = 0; i < resp.data.results.length; i++){
             let temp = []
             for(var j in filterVal){
@@ -293,10 +335,10 @@
             }
             data.push(temp)
           }
-          return data
         }).catch( function (error) {
           console.log(error);
         })
+        return data
       }
     },
     created: function() {

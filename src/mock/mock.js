@@ -335,7 +335,7 @@ const avgSleep = function (opt) {
 
 const yesterday = function (opt) {
   function timetrans(date) {
-    var date = new Date(date);//如果date为13位不需要乘1000
+    var date = new Date(date);    //如果date为13位不需要乘1000
     var Y = date.getFullYear() + '-';
     var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
     var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
@@ -354,7 +354,7 @@ const yesterday = function (opt) {
     time.push(timetrans(item))
     Sleep_people.push(Random.natural(100, 1000))
   }
-  let socorePercent = [
+  let scorePercent = [
     { name: '<50', value: 1000 },
     { name: '50~70', value: 2000 },
     { name: '70~90', value: 6000 },
@@ -372,7 +372,7 @@ const yesterday = function (opt) {
       Sleep_people,
       peroid,
       peroidPeople,
-      socorePercent,
+      scorePercent,
       DeepSleepPercent
     }
   }

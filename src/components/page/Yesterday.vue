@@ -28,6 +28,7 @@
         }).then( resp => {
           console.log(JSON.stringify(resp.data.results, null, 2))
           this.data = resp.data.results
+          console.log(JSON.stringify(this.data, null, 2))
         }).catch( function (error) {
           console.log(error)
         })

@@ -70,7 +70,7 @@
                               Sleep_people,
                               peroid,
                               peroidPeople,
-                              socorePercent,
+                              scorePercent,
                               DeepSleepPercent} = {}) {
         this.chart.setOption({
           tooltip: {},
@@ -166,13 +166,29 @@
             data: peroidPeople
           },{
             type: 'pie',
+            name: '评分情况',
             radius: [0, '30%'],
             center: ['75%', '25%'],
-            data: socorePercent
+            label: {
+                normal: {
+                  formatter: function (item) {
+                    return item.percent+"%\n"+item.name+"分 "+item.value+"人"
+                  }
+                }
+              },
+            data: scorePercent
           }, {
+            name: '平均深睡眠占比',
             type: 'pie',
             radius: [0, '30%'],
             center: ['75%', '75%'],
+            label: {
+              normal: {
+                formatter: function (item) {
+                  return item.percent+"%\n"+item.name+"小时 "+item.value+"人"
+                }
+              }
+            },
             data:DeepSleepPercent
           }]
         });
