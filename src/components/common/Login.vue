@@ -45,14 +45,18 @@
         self.$refs[formName].validate((valid) => {
           if (valid) {
             this.$http({
-              url: '/login/',
+              url: 'api/Login',
               method: 'Post',
               data: {
                 username: this.ruleForm.username,
                 password: this.ruleForm.password
               }
             }).then( (response) => {
-              console.log(response.data);
+              self.$router.push('/index/overview');
+              if(response.Flag === 1)
+              {
+                self.$router.push('/index/overview');
+              }
               self.$router.push('/index/overview');
             }).catch( function (error) {
               console.log(error)

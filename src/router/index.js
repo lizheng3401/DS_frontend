@@ -61,11 +61,11 @@ export default new Router({
           path: '/index/history',
           component: History,
         },
-        {
-          path: 'test',
-          component: Test
-        },
       ]
-    }
+    },
+    {
+      path: '/test',
+      component: Test
+    },
   ]
 })

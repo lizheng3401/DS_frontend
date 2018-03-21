@@ -76,7 +76,6 @@
           tooltip: {},
           title: [{
             text: '入睡人数变化',
-            subtext: '总计 ',
             x: '25%',
             textAlign: 'center'
           }, {
@@ -86,24 +85,33 @@
           }, {
             text: '睡眠时长变化',
             x: '25%',
-            y: '50%',
+            y: '33%',
             textAlign: 'center'
           },{
             text: '平均深睡眠占比情况',
             x: '75%',
-            y: '50%',
+            y: '33%',
+            textAlign: 'center'
+          },{
+            text: '睡眠时长变化',
+            x: '25%',
+            y: '66%',
+            textAlign: 'center'
+          },{
+            text: '平均深睡眠占比情况',
+            x: '75%',
+            y: '66%',
             textAlign: 'center'
           }],
           grid: [{
-            top: "5%",
             width: '50%',
-            bottom: '50%',
+            bottom: '66%',
             left: 10,
             containLabel: true
           }, {
-            top: '55%',
+            top: '36%',
             width: '50%',
-            bottom: 0,
+            bottom: '30%',
             left: 10,
             containLabel: true
           }],
@@ -144,12 +152,6 @@
             stack: 'chart',
             smooth: true,
             z: 3,
-            label: {
-              normal: {
-                position: 'top',
-                show: true
-              }
-            },
             data: Sleep_people
           }, {
             type: 'bar',
@@ -157,13 +159,9 @@
             xAxisIndex: 1,
             yAxisIndex: 1,
             z: 3,
-            label: {
-              normal: {
-                position: 'top',
-                show: true
-              }
-            },
             data: peroidPeople
+          },{
+            type: "pie"
           },{
             type: 'pie',
             name: '评分情况',
