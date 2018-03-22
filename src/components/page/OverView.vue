@@ -21,7 +21,7 @@
 
 <script>
   import BaseChart from '@/components/page/BaseCharts'
-
+  require('echarts/theme/dark')
   export default {
     name: "over-view",
     components: {

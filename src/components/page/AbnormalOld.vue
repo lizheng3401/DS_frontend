@@ -123,18 +123,18 @@
 <style scoped>
   .example {
     font-size: 50px;
-    color: #F6416C;
+    /*color: #F6416C;*/
     display: block;
     text-align: center;
     font-weight: 500;
-    background-color: #282828
+    /*background-color: #282828*/
   }
   .cardItem{
     font-size: 20px;
-    color: #F6416C;
+    /*color: #F6416C;*/
     display: block;
     font-weight: 200;
-    background-color: #282828;
+    /*background-color: #282828;*/
   }
   li:hover{
     background-color: #63635b;

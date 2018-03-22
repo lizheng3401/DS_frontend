@@ -5,9 +5,6 @@
       <side-bar></side-bar>
     </template>
     <div class="content">
-      <!--<el-breadcrumb separator-class="el-icon-arrow-right" class="bread">-->
-        <!--<el-breadcrumb-item v-for="(bread,index) in $store.state.breads" :key="index">{{bread}}</el-breadcrumb-item>-->
-      <!--</el-breadcrumb>-->
       <transition name="move" mode="out-in">
         <router-view></router-view>
       </transition>

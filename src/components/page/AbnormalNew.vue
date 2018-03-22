@@ -12,8 +12,8 @@
               <ul>
                 <li v-for="item in listData" @click="getData(item.id)">
                   <span class="title" v-text="item.username"></span>
-                  <el-tag type="warning">{{item.date}}</el-tag>
-                  <el-tag type="danger">{{item.info}}</el-tag>
+                  <el-tag type="info">{{item.date}}</el-tag>
+                  <el-tag type="success">{{item.info}}</el-tag>
                 </li>
               </ul>
             </vue-seamless-scroll>
@@ -310,13 +310,13 @@
     display: block;
     text-align: center;
     font-weight: 500;
-    background-color: #282828
+    /*background-color: #282828*/
   }
   .seamless-warp {
     height: 232px;
     overflow: hidden;
-    background-color: #282828;
-    color: #1efb0a;
+    /*background-color: #282828;*/
+    color: #F6416C;
   }
   li:hover{
     background-color: #63635b;

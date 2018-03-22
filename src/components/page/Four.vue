@@ -6,9 +6,8 @@
   import echarts from 'echarts'
   require('echarts/theme/dark')
   import {debounce} from '../../utils'
-
   export default {
-    name: "base-charts",
+    name: "four",
     props: {
       className: {
         type: String,
@@ -20,7 +19,7 @@
       },
       height: {
         type: String,
-        default: '400px'
+        default: '700px'
       },
       autoResize: {
         type: Boolean,
@@ -95,7 +94,7 @@
           },{
             text: '睡眠时长变化',
             x: '25%',
-            y: '66%',
+            y: '69%',
             textAlign: 'center'
           },{
             text: '平均深睡眠占比情况',
@@ -114,6 +113,12 @@
             bottom: '30%',
             left: 10,
             containLabel: true
+          },{
+            top: '66%',
+            width: '50%',
+            bottom: '0%',
+            left: 10,
+            containLabel: true
           }],
           xAxis: [{
             type: 'category',
@@ -124,6 +129,13 @@
           }, {
             type: 'category',
             gridIndex: 1,
+            splitLine: {
+              show: false
+            },
+            data: peroid
+          },{
+            type: 'category',
+            gridIndex: 2,
             splitLine: {
               show: false
             },
@@ -146,6 +158,15 @@
             splitLine: {
               show: false
             }
+          },{
+            gridIndex: 2,
+            axisLabel: {
+              interval: 0,
+              rotate: 30
+            },
+            splitLine: {
+              show: false
+            }
           }],
           series: [{
             type: 'bar',
@@ -161,7 +182,18 @@
             z: 3,
             data: peroidPeople
           },{
-            type: "pie"
+            type: "pie",
+            name: '评分情况',
+            radius: [0, '30%'],
+            center: ['75%', '25%'],
+            label: {
+              normal: {
+                formatter: function (item) {
+                  return item.percent+"%\n"+item.name+"分 "+item.value+"人"
+                }
+              }
+            },
+            data: scorePercent
           },{
             type: 'pie',
             name: '评分情况',
@@ -192,7 +224,7 @@
         });
       },
       initChart: function () {
-        this.chart = echarts.init(this.$el, 'dark');
+        this.chart = echarts.init(this.$el);
         this.setOptions(this.chartData)
       }
     },

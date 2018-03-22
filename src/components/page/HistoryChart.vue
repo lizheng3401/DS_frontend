@@ -4,7 +4,7 @@
 
 <script>
 import echarts from "echarts";
-require("echarts/theme/dark");
+require("../../../static/js/shine");
 import { debounce } from "../../utils";
 
 export default {
@@ -90,7 +90,7 @@ export default {
             }
           },
           title: {
-            
+
           },
           tooltip: {},
           calculable: true,
@@ -136,7 +136,7 @@ export default {
       });
     },
     initChart: function() {
-      this.chart = echarts.init(this.$el, "dark");
+      this.chart = echarts.init(this.$el, 'shine');
       this.setOptions(this.chartData);
     }
   }

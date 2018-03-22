@@ -96,7 +96,7 @@
         });
       },
       initChart: function () {
-        this.chart = echarts.init(this.$el, 'dark');
+        this.chart = echarts.init(this.$el);
         this.setOptions(this.chartData)
       }
     },

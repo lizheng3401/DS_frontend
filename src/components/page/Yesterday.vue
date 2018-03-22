@@ -1,6 +1,6 @@
 <template>
   <div>
-  <four style="height: 600px" :chartData="data"></four>
+  <four style="height: 700px" :chartData="data"></four>
   </div>
 </template>
 
