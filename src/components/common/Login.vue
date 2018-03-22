@@ -46,7 +46,7 @@
           if (valid) {
             this.$http({
               url: 'api/Login',
-              method: 'Post',
+              method: 'get',
               data: {
                 username: this.ruleForm.username,
                 password: this.ruleForm.password
