@@ -1,7 +1,5 @@
 <template>
-  <div>
-   <history-chart :chartData="data" style="height: 500px"></history-chart>
-  </div>
+   <history-chart :chartData="data" style="height: 100%"></history-chart>
 </template>
 
 <script>

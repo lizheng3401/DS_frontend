@@ -27,7 +27,7 @@
         default: true
       },
       chartData: {
-        type: Object
+        type: Array
       }
     },
     data: function () {
@@ -66,7 +66,7 @@
       }
     },
     methods: {
-      setOptions: function (data) {
+      setOptions: function (data = []) {
         this.chart.setOption({
           title : {
             text: '各睡眠时期时间对比',
@@ -81,7 +81,6 @@
             {
               name: '时长',
               type: 'pie',
-              radius : '55%',
               center: ['50%', '60%'],
               data:data,
               itemStyle: {

@@ -1,7 +1,6 @@
 <template>
-  <div>
-  <four style="height: 700px" :chartData="data"></four>
-  </div>
+  <four style="height: 66%" :chartData="data"></four>
+  
 </template>
 
 <script>

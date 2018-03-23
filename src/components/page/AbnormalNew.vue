@@ -1,16 +1,16 @@
 <template>
-  <div>
-    <div>
-      <el-row>
-        <el-col :span="18">
-          <two-charts ref="ch" :chartData="lineData" style="height: 500px"></two-charts>
+  <div style="height: 100%">
+    <div style="height: 100%">
+      <el-row :gutter="24"  style="height: 100%">
+        <el-col :span="18"  style="height: 100%">
+          <two-charts ref="ch" :chartData="lineData" style="height:100%"></two-charts>
         </el-col>
-        <el-col :span="6" >
-          <base-pie :chartData="pieData.sleepPeroid"  style="margin:0px;" width="100%" height="200px"></base-pie>
+        <el-col :span="6" style="height: 100%">
+          <base-pie :chartData="pieData.sleepPeroid"  style="margin:0px;" height="40%"></base-pie>
           <countTo class="example" ref="num"  :start-val="_startVal" :end-val="_endVal" :prefix="_prefix" :suffix="_suffix" :autoplay="true"></countTo>
           <vue-seamless-scroll :data="listData" :class-option="optionLeft" class="seamless-warp">
               <ul>
-                <li v-for="item in listData" @click="getData(item.id)">
+                <li v-for="(item,index) in listData" @click="handleClick(item)" :key="index">
                   <span class="title" v-text="item.username"></span>
                   <el-tag type="info">{{item.date}}</el-tag>
                   <el-tag type="success">{{item.info}}</el-tag>
@@ -295,6 +295,16 @@
       start:function () {
         this.$refs.num.start()
       },
+      handleClick: function(user){
+        this.getData(user.id)
+        /*
+           TODO:
+           the feature: when you click the the li of ul element, 
+           the name which in count-to componeent would be change to the click name 
+        */
+        
+        // this.setPrefix = user.username + " "
+      }
     },
     created: function () {
       this.getData(1)
@@ -310,10 +320,9 @@
     display: block;
     text-align: center;
     font-weight: 500;
-    /*background-color: #282828*/
   }
   .seamless-warp {
-    height: 232px;
+    height: 45%;
     overflow: hidden;
     /*background-color: #282828;*/
     color: #F6416C;

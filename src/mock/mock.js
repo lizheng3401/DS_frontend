@@ -260,7 +260,7 @@ const sleep = function (opt) {
 }
 const abnormalList = function (opt) {
   let users_list = []
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 20; i++) {
     let newObject = {
       userId: i + 1,
       username: Random.cname(),
@@ -316,19 +316,19 @@ const avgSleep = function (opt) {
   let time = []
   for (var i = 0; i < 7; i++) {
     time.push(i + 1)
-    sleepN1.push(Random.float(0.5, 8, 1, 1))
-    sleepN2.push(Random.float(0.5, 8, 1, 1))
-    sleepN3.push(Random.float(0.5, 8, 1, 1))
-    sleepN4.push(Random.float(0.5, 8, 1, 1))
+    sleepN1.push(Random.float(0.1, 0.5, 1, 1))
+    sleepN2.push(Random.float(1.5, 2.5, 1, 1))
+    sleepN3.push(Random.float(2.5, 3.5, 1, 1))
+    sleepN4.push(Random.float(1.5, 2, 1, 1))
   }
 
   return {
     results: {
       // time:time,
-      "sleepN1": [0.5, 0.4, 0.6, 0.3, 0.8, 0.5, 0.7],
-      "sleepN2": [2.0, 2.1, 1.9, 2.5, 2.2, 2.0, 2.8],
-      "sleepN3": [3.5, 3.0, 3.4, 3.1, 3.3, 3.4, 3.0],
-      "sleepN4": [2.0, 1.8, 2.1, 1.9, 1.7, 2.0, 2.1],
+      sleepN1,
+      sleepN2,
+      sleepN3,
+      sleepN4
     }
   }
 }

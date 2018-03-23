@@ -30,8 +30,8 @@
         <el-card class="cardItem" style="height: 300px">
           <vue-seamless-scroll  :data="listData" :class-option="optionLeft">
             <ul>
-              <li v-for="item in listData" @click="handlInfo(item.id)">
-                <span class="title" v-text="item.username"></span>
+              <li v-for="(item,index) in listData" @click="handlInfo(item)" :key="index">
+                <span class="title" style="color: #F6416C;">{{item.username}}</span>
                 <el-tag type="warning">{{item.date}}</el-tag>
                 <el-tag type="danger">{{item.info}}</el-tag>
               </li>
@@ -107,9 +107,9 @@
           console.log(error)
         })
       },
-      handlInfo: function(userId){
-        this.getHB(userId)
-        this.getSleepData(userId)
+      handlInfo: function(item){
+        this.getHB(item.id)
+        this.getSleepData(item.id)
       }
     },
     created: function () {
@@ -123,7 +123,7 @@
 <style scoped>
   .example {
     font-size: 50px;
-    /*color: #F6416C;*/
+    color: #F6416C;
     display: block;
     text-align: center;
     font-weight: 500;
@@ -131,7 +131,7 @@
   }
   .cardItem{
     font-size: 20px;
-    /*color: #F6416C;*/
+    /* color: #F6416C; */
     display: block;
     font-weight: 200;
     /*background-color: #282828;*/

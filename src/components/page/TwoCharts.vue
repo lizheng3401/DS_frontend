@@ -71,11 +71,17 @@
         this.chart.setOption({
           title: [{
             left: 'center',
-            text: '昨晚呼吸率变化情况'
+            text: '昨晚呼吸率变化情况',
+            textStyle: {
+              fontWeight: 'bold'
+            }
           }, {
             top: '50%',
             left: 'center',
-            text: '昨晚心率变化情况'
+            text: '昨晚心率变化情况',
+            textStyle: {
+              fontWeight: 'bold'
+            }
           }],
           tooltip: {
             trigger: 'axis',
@@ -83,7 +89,6 @@
               type: 'cross',
               label: {
                 backgroundColor: '#000000',
-                // formatter: '{value}'
               }
             },
             padding: [5, 10]
@@ -117,14 +122,16 @@
             gridIndex: 1
           }],
           grid: [{
+            top: '6%',
             left:'3%',
             right: '3%',
-            bottom: '60%',
+            bottom: '50%',
             containLabel: true
           }, {
             left:'3%',
             right: '3%',
-            top: '60%',
+            top: '58%',
+            bottom: 0,
             containLabel: true
           }],
           toolbox: {

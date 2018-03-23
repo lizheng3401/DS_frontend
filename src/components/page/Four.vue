@@ -76,47 +76,44 @@
           title: [{
             text: '入睡人数变化',
             x: '25%',
-            textAlign: 'center'
+            textAlign: 'center',
+            textStyle: {
+              fontSize:14
+            }
           }, {
             text: '评分情况',
             x: '75%',
-            textAlign: 'center'
+            textAlign: 'center',
+            textStyle: {
+              fontSize:14
+            }
           }, {
             text: '睡眠时长变化',
             x: '25%',
-            y: '33%',
-            textAlign: 'center'
+            y: '50%',
+            textAlign: 'center',
+            textStyle: {
+              fontSize:14
+            }
           },{
             text: '平均深睡眠占比情况',
             x: '75%',
-            y: '33%',
-            textAlign: 'center'
-          },{
-            text: '睡眠时长变化',
-            x: '25%',
-            y: '69%',
-            textAlign: 'center'
-          },{
-            text: '平均深睡眠占比情况',
-            x: '75%',
-            y: '66%',
-            textAlign: 'center'
+            y: '50%',
+            textAlign: 'center',
+            textStyle: {
+              fontSize:14
+            }
           }],
           grid: [{
+            top:20,
             width: '50%',
-            bottom: '66%',
+            bottom: '55%',
             left: 10,
             containLabel: true
           }, {
-            top: '36%',
+            top: '55%',
             width: '50%',
-            bottom: '30%',
-            left: 10,
-            containLabel: true
-          },{
-            top: '66%',
-            width: '50%',
-            bottom: '0%',
+            bottom: 0,
             left: 10,
             containLabel: true
           }],
@@ -133,13 +130,6 @@
               show: false
             },
             data: peroid
-          },{
-            type: 'category',
-            gridIndex: 2,
-            splitLine: {
-              show: false
-            },
-            data: peroid
           }],
           yAxis: [{
             axisLabel: {
@@ -151,15 +141,6 @@
             },
           }, {
             gridIndex: 1,
-            axisLabel: {
-              interval: 0,
-              rotate: 30
-            },
-            splitLine: {
-              show: false
-            }
-          },{
-            gridIndex: 2,
             axisLabel: {
               interval: 0,
               rotate: 30
@@ -184,7 +165,7 @@
           },{
             type: "pie",
             name: '评分情况',
-            radius: [0, '30%'],
+            radius: [0, '20%'],
             center: ['75%', '25%'],
             label: {
               normal: {
@@ -194,23 +175,10 @@
               }
             },
             data: scorePercent
-          },{
-            type: 'pie',
-            name: '评分情况',
-            radius: [0, '30%'],
-            center: ['75%', '25%'],
-            label: {
-                normal: {
-                  formatter: function (item) {
-                    return item.percent+"%\n"+item.name+"分 "+item.value+"人"
-                  }
-                }
-              },
-            data: scorePercent
           }, {
             name: '平均深睡眠占比',
             type: 'pie',
-            radius: [0, '30%'],
+            radius: [0, '20%'],
             center: ['75%', '75%'],
             label: {
               normal: {
@@ -224,7 +192,7 @@
         });
       },
       initChart: function () {
-        this.chart = echarts.init(this.$el);
+        this.chart = echarts.init(this.$el, 'dark');
         this.setOptions(this.chartData)
       }
     },
