@@ -165,7 +165,7 @@
           },{
             type: "pie",
             name: '评分情况',
-            radius: [0, '20%'],
+            radius: [0, '30%'],
             center: ['75%', '25%'],
             label: {
               normal: {
@@ -178,7 +178,7 @@
           }, {
             name: '平均深睡眠占比',
             type: 'pie',
-            radius: [0, '20%'],
+            radius: [0, '30%'],
             center: ['75%', '75%'],
             label: {
               normal: {

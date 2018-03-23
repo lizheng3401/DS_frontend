@@ -4,14 +4,14 @@
              unique-opened router
              background-color="#545c64" text-color="#fff" active-text-color="#ffd04b"
              @open="handleOpen" @close="handleClose" @select="handleOpen">
-      <template v-for="menuItem in menu">
-        <el-submenu v-if="menuItem.subs" :index="menuItem.index">
+      <template v-for="(menuItem,index) in menu">
+        <el-submenu v-if="menuItem.subs" :index="menuItem.index" :key="index">
           <span slot="title"><i :class="menuItem.icon"></i>{{menuItem.title}}</span>
           <el-menu-item v-for="(subsItem, i) in menuItem.subs" :key="i" :index="subsItem.index">
             {{subsItem.title}}
           </el-menu-item>
         </el-submenu>
-        <el-menu-item v-else :index="menuItem.index">
+        <el-menu-item v-else :index="menuItem.index" :key="index">
           <span><i :class="menuItem.icon"></i>{{menuItem.title}}</span>
         </el-menu-item>
       </template>

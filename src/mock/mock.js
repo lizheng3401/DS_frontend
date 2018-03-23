@@ -419,7 +419,7 @@ const history = function (opt) {
 Mock.mock('/news', /post|get/i, produceData);
 Mock.mock('/users/', 'get', userData);
 Mock.mock('api/sleepData/1', 'get', sleepData);
-Mock.mock('/login/', 'post', "success");
+// Mock.mock('/login/', 'post', "success");
 Mock.mock('/allusers', 'get', Mock.mock({
   "results|10": [{
     'id|+1': 1,

@@ -21,6 +21,8 @@
 </template>
 
 <script>
+  import cookie from '../../utils/cookie';
+  import { login } from '../../api/api.js'
   export default {
     name: "login",
     data: function () {
@@ -44,20 +46,17 @@
         const self = this;
         self.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$http({
-              url: 'api/Login',
-              method: 'get',
-              data: {
+            login({
                 username: this.ruleForm.username,
                 password: this.ruleForm.password
-              }
             }).then( (response) => {
-              self.$router.push('/index/overview');
-              if(response.Flag === 1)
-              {
-                self.$router.push('/index/overview');
-              }
-              self.$router.push('/index/overview');
+              cookie.setCookie('name',this.ruleForm.username,7);
+              cookie.setCookie('token',"dsajkdladjklaskdkladjk",7)
+              //存储在store
+              // 更新store数据
+              self.$store.dispatch('setInfo');
+              //跳转到首页页面
+              this.$router.push('index')
             }).catch( function (error) {
               console.log(error)
             });
@@ -66,7 +65,15 @@
             return false;
           }
         });
-      }
+      },
+      
+    },
+    created: function () {
+      cookie.delCookie('token');
+      cookie.delCookie('name');
+      //重新触发store
+      //更新store数据
+      this.$store.dispatch('setInfo')
     }
   }
 </script>
