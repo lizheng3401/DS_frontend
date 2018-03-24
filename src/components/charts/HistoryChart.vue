@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import echarts from "echarts";
-import { debounce } from "../../utils";
+import echarts from "echarts"
+import { debounce } from "../../utils/index"
 
 export default {
   name: "history-chart",
@@ -65,12 +65,14 @@ export default {
     }
   },
   methods: {
-    setOptions: function({date, content} = {}) {
+    setOptions: function(data) {
+      const content = data.content
+      const date = data.date
       let options = []
       for(let i = 0; i < 12; i++)
       {
         options.push({
-          title: { text: content[i].time},
+          title: { text: content[i].time+""},
           series: { data: content[i].value}
         })
       }
@@ -87,9 +89,6 @@ export default {
                 return s+"月"
               }
             }
-          },
-          title: {
-
           },
           tooltip: {},
           calculable: true,
@@ -123,12 +122,16 @@ export default {
             }
           ],
           series: [
-            { name: "平均值", type: "bar", label: {
-              normal: {
-                position: 'top',
-                show: true
+            {
+              name: "平均值",
+              type: "bar",
+              label: {
+                normal: {
+                  position: 'top',
+                  show: true
+                }
               }
-            },},
+            },
           ]
         },
         options

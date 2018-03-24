@@ -379,23 +379,12 @@ const yesterday = function (opt) {
 }
 
 const history = function (opt) {
-  function timetrans(date) {
-    var date = new Date(date);//如果date为13位不需要乘1000
-    var Y = date.getFullYear() + '-';
-    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
-    var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
-    var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
-    var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
-    return Y+M;
-  }
-  let item = Date.parse(new Date('2018/1/2 19:00:00'))
   let date = []
   let content = []
-  for(let i = 0; i < 13; i++){
-    date.push((new Date(item).getMonth() + 1))
+  for(let i = 0; i < 12; i++){
+    date.push(i+1)
     let newObject = {
-      time: timetrans(item).replace("-", "年").replace("-","月份"),
+      time: '2018年'+(i+1)+'月份',
       value: [
         Random.float(5, 10, 1,2),
         Random.float(60, 100, 1,2),
@@ -406,7 +395,6 @@ const history = function (opt) {
       ]
     }
     content.push(newObject)
-    item = item + 60 * 1000 * 60 * 24 * 30;
   }
 
   return {
@@ -467,6 +455,3 @@ Mock.mock(RegExp('api/avg/users/sleepData*'), 'get', avgSleep)
 Mock.mock(RegExp('api/yesterday/'), 'get', yesterday)
 
 Mock.mock(RegExp('api/history/'), 'get', history)
-
-
-

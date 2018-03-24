@@ -24,9 +24,9 @@
 </template>
 
 <script>
-  import TwoCharts from './TwoCharts'
+  import TwoCharts from '../charts/TwoCharts'
   import countTo from 'vue-count-to'
-  import BasePie from './BasePie'
+  import BasePie from '../charts/BasePie'
   import vueSeamlessScroll from 'vue-seamless-scroll'
   export default {
     name: "abnormal-new",
@@ -299,10 +299,10 @@
         this.getData(user.id)
         /*
            TODO:
-           the feature: when you click the the li of ul element, 
-           the name which in count-to componeent would be change to the click name 
+           the feature: when you click the the li of ul element,
+           the name which in count-to componeent would be change to the click name
         */
-        
+
         // this.setPrefix = user.username + " "
       }
     },

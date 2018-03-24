@@ -44,8 +44,8 @@
 </template>
 
 <script>
-  import TwoLines from './Twolines'
-  import StackBar from './StackBar'
+  import TwoLines from '../charts/Twolines'
+  import StackBar from '../charts/StackBar'
   import vueSeamlessScroll from 'vue-seamless-scroll'
   export default {
     name: "abnormal-old",

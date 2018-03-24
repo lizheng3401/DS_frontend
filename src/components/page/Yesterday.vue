@@ -1,10 +1,10 @@
 <template>
-  <four style="height: 66%" :chartData="data"></four>
-  
+  <four style="height: 100%" :chartData="data"></four>
+
 </template>
 
 <script>
-  import Four from './Four'
+  import Four from '../charts/Four'
   export default {
     name: "yesterday",
     components: {
@@ -25,9 +25,7 @@
             time: 'today'
           }
         }).then( resp => {
-          console.log(JSON.stringify(resp.data.results, null, 2))
           this.data = resp.data.results
-          console.log(JSON.stringify(this.data, null, 2))
         }).catch( function (error) {
           console.log(error)
         })

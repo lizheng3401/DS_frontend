@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import BaseChart from '@/components/page/BaseCharts'
+  import BaseChart from '../charts/BaseCharts'
   require('echarts/theme/dark')
   export default {
     name: "over-view",

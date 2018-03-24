@@ -20,7 +20,6 @@
 </template>
 
 <script>
-  import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
   export default {
     name: "side-bar",
     data: function () {
@@ -75,17 +74,10 @@
       }
     },
     methods: {
-      ...mapMutations([
-        'addBread',
-        'delBread',
-      ]),
       handleOpen(key, keyPath) {
-        this.addBread(key);
-        console.log(key,keyPath)
       },
       handleClose(key, keyPath) {
-        this.delBread();
-        console.log(key,keyPath)
+
       }
     }
   }

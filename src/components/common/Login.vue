@@ -50,8 +50,8 @@
                 Phone: this.ruleForm.username,
                 Password: this.ruleForm.password
             }).then( (response) => {
-              cookie.setCookie('name',this.ruleForm.username,7);
-              cookie.setCookie('token',response.data.Token,7)
+              cookie.setCookie('name',this.ruleForm.username, 7);
+              cookie.setCookie('token', response.data.Token, 7);
               self.$store.dispatch('setInfo');
               this.$router.push('index')
             }).catch( function (error) {

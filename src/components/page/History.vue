@@ -1,9 +1,9 @@
 <template>
-   <history-chart :chartData="data" style="height: 100%"></history-chart>
+   <history-chart :chartData="data" style="height: 100%" ></history-chart>
 </template>
 
 <script>
-  import HistoryChart from './HistoryChart'
+  import HistoryChart from '../charts/HistoryChart'
   export default {
     name: "history",
     components: {
@@ -11,7 +11,7 @@
     },
     data: function () {
       return {
-        data: {}
+        data: undefined
       }
     },
     methods: {

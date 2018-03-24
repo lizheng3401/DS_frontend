@@ -5,10 +5,10 @@
 <script>
   import echarts from 'echarts'
   require('echarts/theme/dark')
-  import {debounce} from '../../utils'
+  import {debounce} from '../../utils/index'
 
   export default {
-    name: "two-lines",
+    name: "base-charts",
     props: {
       className: {
         type: String,
@@ -66,10 +66,13 @@
       }
     },
     methods: {
-      setOptions: function ({time,heart,breath} = {}) {
+      setOptions: function ({ cate, expectedData, actualData, time } = {}) {
+        if (!cate){
+          cate = ''
+        }
         this.chart.setOption({
           title: {
-            text: '近30天折线图'
+            text: '最近30天'+ cate +'折线图'
           },
           xAxis: {
             type: 'category',
@@ -95,14 +98,14 @@
             },
             padding: [5, 10]
           },
-          yAxis: [{
-            name: '次/分钟',
+          yAxis: {
+            name: '人数',
             axisTick: {
               show: false
             }
-          }],
+          },
           legend: {
-            data: [ '平均心率', '平均呼吸率']
+            data: [ '正常', '异常']
           },
           toolbox: {
             feature: {
@@ -112,7 +115,7 @@
           },
           series: [
             {
-              name: '平均心率',
+              name: '正常',
               smooth: true,
               type: 'line',
               itemStyle: {
@@ -124,10 +127,12 @@
                   }
                 }
               },
-              data: heart,
+              data: actualData,
+              animationDuration: 2500,
+              animationEasing: 'quadraticOut'
             },
             {
-              name: '平均呼吸率',
+              name: '异常',
               itemStyle: {
                 normal: {
                   color: '#FF005A',
@@ -139,7 +144,9 @@
               },
               smooth: true,
               type: 'line',
-              data: breath,
+              data: expectedData,
+              animationDuration: 2500,
+              animationEasing: 'cubicInOut'
             }
           ]
         });

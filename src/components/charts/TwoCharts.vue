@@ -5,7 +5,7 @@
 <script>
   import echarts from 'echarts'
   require('echarts/theme/dark')
-  import {debounce} from '../../utils'
+  import {debounce} from '../../utils/index'
 
   export default {
     name: "two-charts",
