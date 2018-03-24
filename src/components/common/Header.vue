@@ -7,7 +7,7 @@
           {{username}}
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="loginout">退出</el-dropdown-item>
+          <el-dropdown-item command="logout">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -15,27 +15,30 @@
 </template>
 
 <script>
+  import cookie from '../../utils/cookie'
   import {mapState} from 'vuex'
   export default {
     name: "Header",
     data: function () {
       return {
-        username: 'username'
+        username: ''
       }
     },
     computed: {
-      ...mapState(['breads'])
+
     },
     methods: {
       handleCommand: function (command){
         if(command === "logout")
         {
-          alert("this")
+          cookie.delCookie('name');
+          cookie.delCookie('token')
+          this.$router.push('/login')
         }
-      },
-      logout: function (command) {
-        this.$message('click on item ' + command)
       }
+    },
+    created: function () {
+      this.username = unescape(cookie.getCookie('name'))
     }
   }
 </script>

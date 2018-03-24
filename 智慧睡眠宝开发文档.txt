@@ -152,25 +152,3 @@ Token:NAOAep5LbmaBtxxRGNqo047CvRXwi4PmirGa7OQACX0SSjcAguYx2K5aDpiAMEMn5HXWDY0mz+
     "Message": "呼吸异常人数百分比获取成功!",
     "Percent": "6"
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

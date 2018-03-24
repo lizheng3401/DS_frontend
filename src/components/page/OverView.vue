@@ -30,8 +30,8 @@
     data: function () {
       let time = new Date()
       return {
-        // title: time.getFullYear()+"年"+ (time.getMonth() + 1) + "月" + time.getDate() + "日睡眠监测概况",
-        title: "2018年3月4日睡眠监测概况",
+        title: time.getFullYear()+"年"+ (time.getMonth() + 1) + "月" + time.getDate() + "日睡眠监测概况",
+        // title: "2018年3月4日睡眠监测概况",
         URL: {
           title: [
             '睡眠正常人数',

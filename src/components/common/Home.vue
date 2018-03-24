@@ -34,8 +34,5 @@
 </script>
 
 <style scoped>
-  .bread{
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
+
 </style>
